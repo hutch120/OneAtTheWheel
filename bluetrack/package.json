@@ -1,0 +1,10 @@
+{
+    "name": "bluetrackmap",
+    "version": "1.0.16",
+    "description": "BlueTrackMap Component Licenced by Hutchison Software. Copyright 2020. hutchisonsoftware.com.au",
+    "main": "BlueTrackMap.js",
+    "scripts": {},
+    "keywords": [],
+    "author": "Hutchison Software",
+    "license": "Hutchison Software"
+}
