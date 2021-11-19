@@ -5,7 +5,7 @@ import useGeolocation from 'react-hook-geolocation'
 import { Header } from '../components/Header'
 
 const Page = styled.div`
-height: calc(100vh - 50px);
+height: 100vh;
 width: 100vw;
 `
 

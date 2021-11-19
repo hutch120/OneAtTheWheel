@@ -3,24 +3,21 @@ import styled from 'styled-components'
 import { updateRoute, ROUTES } from '../pages/Routes'
 
 const Wrapper = styled.div`
-font-size: 18px;
-line-height: 24px;
-background-color: rgb(255, 255, 255);
-color: rgb(68, 68, 68);
-box-sizing: border-box;
-text-size-adjust: 100%;
+position: absolute;
+top: 0;
+left: 0;
+right: 0;
+z-index: 1;
 `
 
 const HeaderDiv = styled.div`
 display: flex;
 box-sizing: border-box;
+font-size: 18px;
 max-width: 100%;
 -webkit-box-align: center;
 align-items: center;
-background-color: rgb(218, 218, 218);
 color: rgb(68, 68, 68);
-min-width: 0px;
-min-height: 0px;
 flex-direction: row;
 height: 50px;
 flex: 0 0 auto;
@@ -75,6 +72,10 @@ cursor: pointer;
 float: right;
 `
 
+export const HeaderBuffer = styled.div`
+padding-top: 50px;
+`
+
 function onClickHome ({ setRoute }) {
   updateRoute({ key: '', value: '', setRoute })
 }
@@ -90,7 +91,6 @@ export function Header ({ setRoute }) {
         <HomeButton onClick={() => onClickHome({ setRoute })}><Title><LogoHome src='images/home.svg' /><Stretch /><LogoWheel src='images/ship-wheel.svg' />One At The Wheel</Title></HomeButton>
         <Stretch />
         <HelpButton onClick={() => onClickInfo({ setRoute })}><LogoHelp src='images/help.svg' /></HelpButton>
-
       </HeaderDiv>
     </Wrapper>
   )

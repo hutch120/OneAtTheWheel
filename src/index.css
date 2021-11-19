@@ -25,3 +25,11 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.ol-attribution button {
+  font-size: 8px !important; 
+}
+
+.ol-zoom {
+  display: none !important;
+}

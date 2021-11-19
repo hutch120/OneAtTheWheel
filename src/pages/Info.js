@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Header } from '../components/Header'
+import { Header, HeaderBuffer } from '../components/Header'
 
 const Wrapper = styled.div`
 position: absolute;
@@ -61,7 +61,16 @@ export function Info ({ setRoute }) {
   return (
     <Wrapper>
       <Header setRoute={setRoute} />
-      <About>This is a little project I wrote to assist in figuring out the marks for yacht racing on Port Phillip Bay. I've made it public, but I give no warrantee or fitness for any purpose. If you do like it, please let me know on LinkedIn.</About>
+      <HeaderBuffer />
+      <About>
+        This is a little project I wrote to assist in figuring out the marks for yacht racing on Port Phillip Bay.
+        <br /><br />
+        I've made it public, but I give no warrantee or fitness for any purpose.
+        <br /><br />
+        If you do like it, please let me know on LinkedIn.
+        <br /><br />
+        If you have a feature suggestion please add it to Github Issues.
+      </About>
       <ButtonWrapper>
         <Button href='https://github.com/hutch120/OneAtTheWheel/blob/main/LICENSE'>MIT Licence</Button>
       </ButtonWrapper>
