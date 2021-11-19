@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { PAGES } from '../App'
+import { updateRoute, ROUTES } from '../pages/Routes'
 
 const Wrapper = styled.div`
 font-size: 18px;
@@ -75,23 +75,21 @@ cursor: pointer;
 float: right;
 `
 
-function onClickHome ({ setPageData }) {
-  window.location.hash = ''
-  setPageData({ page: PAGES.landing, data: {} })
+function onClickHome ({ setRoute }) {
+  updateRoute({ key: '', value: '', setRoute })
 }
 
-function onClickInfo ({ setPageData }) {
-  window.location.hash = '/info'
-  setPageData({ page: PAGES.info, data: {} })
+function onClickInfo ({ setRoute }) {
+  updateRoute({ key: ROUTES.info, value: '', setRoute })
 }
 
-export function Header ({ setPageData }) {
+export function Header ({ setRoute }) {
   return (
     <Wrapper>
       <HeaderDiv>
-        <HomeButton onClick={() => onClickHome({ setPageData })}><Title><LogoHome src='images/home.svg' /><Stretch /><LogoWheel src='images/ship-wheel.svg' />One At The Wheel</Title></HomeButton>
+        <HomeButton onClick={() => onClickHome({ setRoute })}><Title><LogoHome src='images/home.svg' /><Stretch /><LogoWheel src='images/ship-wheel.svg' />One At The Wheel</Title></HomeButton>
         <Stretch />
-        <HelpButton onClick={() => onClickInfo({ setPageData })}><LogoHelp src='images/help.svg' /></HelpButton>
+        <HelpButton onClick={() => onClickInfo({ setRoute })}><LogoHelp src='images/help.svg' /></HelpButton>
 
       </HeaderDiv>
     </Wrapper>

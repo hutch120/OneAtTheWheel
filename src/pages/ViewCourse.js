@@ -17,7 +17,7 @@ bottom: 30px;
 z-index: -1;
 `
 
-export function MapShowCourse ({ setPageData }) {
+export function ViewCourse ({ setRoute }) {
   const geolocation = useGeolocation({
     enableHighAccuracy: true,
     maximumAge: 15000,
@@ -36,7 +36,7 @@ export function MapShowCourse ({ setPageData }) {
 
   return (
     <Page>
-      <Header setPageData={setPageData} />
+      <Header setRoute={setRoute} />
       {!geolocation.error &&
         <GeoInfo>
           <ul>

@@ -32,7 +32,7 @@ font-size: 12px;
 `
 
 let features = []
-export function MapCreateCourse ({ setPageData }) {
+export function CreateCourse ({ setRoute }) {
   const [, updateState] = useState()
   const forceUpdate = useCallback(() => updateState({}), [])
 
@@ -60,7 +60,7 @@ export function MapCreateCourse ({ setPageData }) {
 
   return (
     <Page>
-      <Header setPageData={setPageData} />
+      <Header setRoute={setRoute} />
       <MapSection>
         <BlueTrackMap MapOptions={MapOptions} MapCallback={(evt) => MapCallback({ evt, forceUpdate })} />
       </MapSection>

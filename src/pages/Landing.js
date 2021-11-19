@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
-import { PAGES } from '../App'
 import { Header } from '../components/Header'
+import { updateRoute, ROUTES } from './Routes'
 
 const Wrapper = styled.div`
 position: absolute;
@@ -53,27 +53,23 @@ transition-timing-function: ease-in-out;
 font-weight: bold;
 `
 
-function onClickShowACourse ({ setPageData }) {
-  const course = '/course/123'
-  window.location.hash = course
-  setPageData({ page: PAGES.mapShowCourse, data: { course } })
+function onClickShowACourse ({ setRoute }) {
+  updateRoute({ key: ROUTES.viewcourse, value: '123', setRoute })
 }
 
-function onClickCreateACourse ({ setPageData }) {
-  const course = '/course/new'
-  window.location.hash = course
-  setPageData({ page: PAGES.mapCreateCourse, data: { course } })
+function onClickCreateACourse ({ setRoute }) {
+  updateRoute({ key: ROUTES.createcourse, value: '', setRoute })
 }
 
-export function Landing ({ setPageData }) {
+export function Landing ({ setRoute }) {
   return (
     <Wrapper>
-      <Header setPageData={setPageData} />
+      <Header setRoute={setRoute} />
       <ButtonWrapper>
-        <Button onClick={() => onClickShowACourse({ setPageData })}>View course</Button>
+        <Button onClick={() => onClickShowACourse({ setRoute })}>View course</Button>
       </ButtonWrapper>
       <ButtonWrapper>
-        <Button onClick={() => onClickCreateACourse({ setPageData })}>Create course</Button>
+        <Button onClick={() => onClickCreateACourse({ setRoute })}>Create course</Button>
       </ButtonWrapper>
       <Background />
     </Wrapper>
