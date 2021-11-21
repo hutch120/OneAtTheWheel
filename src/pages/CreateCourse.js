@@ -9,26 +9,19 @@ width: 100vw;
 `
 
 const MapSection = styled.div`
-height: calc(100vh - 150px);
+height: 100vh;
 width: 100vw;
-`
-
-const InfoSection = styled.div`
-height: 100px;
-width: 100vw;
-`
-
-const Title = styled.div`
-padding-left: 10px;
-left: 80px;
-color: #0080ff;
-font-size: 20px;
 `
 
 const Instructions = styled.div`
-padding-left: 10px;
+position: absolute;
+top: 42px;
+left: 10px;
 color: #0080ff;
-font-size: 12px;
+font-size: 16px;
+font-weight: 600;
+max-width: 100vw;
+color: grey;
 `
 
 let features = []
@@ -64,10 +57,7 @@ export function CreateCourse ({ setRoute }) {
       <MapSection>
         <BlueTrackMap MapOptions={MapOptions} MapCallback={(evt) => MapCallback({ evt, forceUpdate })} />
       </MapSection>
-      <InfoSection>
-        <Title>Create a course</Title>
-        <Instructions>Click/Press on map to create each waypoint (approx) Edit lat/lng after if required.</Instructions>
-      </InfoSection>
+      <Instructions>Click/Press on map to create each waypoint (approx) Edit lat/lng after if required.</Instructions>
     </Page>
   )
 }

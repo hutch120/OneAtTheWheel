@@ -53,13 +53,6 @@ transition-timing-function: ease-in-out;
 font-weight: bold;
 `
 
-const Instructions = styled.div`
-padding-left: 10px;
-color: #0080ff;
-font-size: 16px;
-max-width: 400px;
-`
-
 function onClickShowACourse ({ setRoute }) {
   updateRoute({ key: ROUTES.viewcourse, value: '123', setRoute })
 }
@@ -79,7 +72,6 @@ export function Landing ({ setRoute }) {
       <ButtonWrapper>
         <Button onClick={() => onClickCreateACourse({ setRoute })}>Create course</Button>
       </ButtonWrapper>
-      <Instructions>Click/Press on map to create each waypoint (approx) Edit lat/lng after if required.</Instructions>
       <Background />
     </Wrapper>
   )

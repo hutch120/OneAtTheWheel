@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Landing } from './Landing'
 import { ViewCourse } from './ViewCourse'
 import { CreateCourse } from './CreateCourse'
-import { Info } from './Info'
+import { Info } from './Help'
 import styled from 'styled-components'
 
 const Page = styled.div`

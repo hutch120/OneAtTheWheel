@@ -24,7 +24,8 @@ z-index: -2;
 `
 
 const ButtonWrapper = styled.div`
-padding-top: 20px;
+display: inline-block;
+padding: 5px;
 `
 
 const About = styled.div`
@@ -64,11 +65,8 @@ export function Info ({ setRoute }) {
       <HeaderBuffer />
       <About>
         This is a little project I wrote to assist in figuring out the marks for yacht racing on Port Phillip Bay.
-        <br /><br />
         I've made it public, but I give no warrantee or fitness for any purpose.
-        <br /><br />
         If you do like it, please let me know on LinkedIn.
-        <br /><br />
         If you have a feature suggestion please add it to Github Issues.
       </About>
       <ButtonWrapper>
