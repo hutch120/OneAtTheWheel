@@ -6,48 +6,46 @@ on:
       - main
 
 jobs:
-  deploy:
-    name: deploy
+  deployserver:
+
+    name: deployserver
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./app
     strategy:
       matrix:
         node-version: [14.x]
     steps:
-    - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Generate secrets.js file
+        run: echo "module.exports = { SERVERLESS_ACCESS_KEY${{':'}} \"${{ secrets.SERVERLESS_ACCESS_KEY }}\" }" > ./secrets.js
+      - name: Load dependancies
+        run: yarn
+      - name: serverless deploy
+        uses: serverless/github-action@master
+        with:
+          args: deploy
+        env:
+          SERVERLESS_ACCESS_KEY: ${{ secrets.SERVERLESS_ACCESS_KEY }}
 
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
-
-    - name: Generate secrets.js file
-      run: echo "module.exports = { SERVERLESS_ACCESS_KEY${{':'}} \"${{ secrets.SERVERLESS_ACCESS_KEY }}\" }" > ./secrets.js
-      working-directory: ./server
-
-    - name: Load dependancies
-      run: yarn
-      working-directory: ./server
-
-    - name: serverless deploy
-      uses: serverless/github-action@master
-      working-directory: ./server
-      with:
-        args: deploy
-      env:
-        SERVERLESS_ACCESS_KEY: ${{ secrets.SERVERLESS_ACCESS_KEY }}
-
-    - name: Configure AWS credentials from Production account
-      uses: aws-actions/configure-aws-credentials@v1
-      with:
-        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: ap-southeast-2
-
-    - name: Build site
-      run: yarn && yarn build
-
-    - name: Copy files to the production website with the AWS CLI
-      run: aws s3 sync ./build s3://one-at-the-wheel --delete --exclude "*.map" --acl public-read
-
-    # - name: Clear cache one-at-the-wheel
-    #  run: aws cloudfront create-invalidation --distribution-id E3G3NYT4OLNIFI --paths "/*"
+  deployclient:
+    name: deployclient
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@main
+      - name: Configure AWS credentials from Production account
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-southeast-2
+      - name: Build site
+        run: yarn && yarn build
+      - name: Copy files to the production website with the AWS CLI
+        run: aws s3 sync ./build s3://one-at-the-wheel --delete --exclude "*.map" --acl public-read
