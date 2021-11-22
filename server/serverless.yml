@@ -1,4 +1,6 @@
-org: hutch120
+# Remove org and app to avoid need for SERVERLESS_ACCESS_KEY 
+# See https://github.com/serverless/github-action/issues/53 for more details.
+org: hutch120 
 app: one-at-the-wheel
 service: one-at-the-wheel
 frameworkVersion: '2'
@@ -12,9 +14,9 @@ provider:
     - Effect: Allow
       Action:
         - s3:*
-      Resource: "*"
+      Resource: "arn:aws:s3:::${self:resources.Resources.oneAtTheWheelData.Properties.BucketName}/*"
   environment:
-    ONE_AT_THE_WHEEL_BUCKET: ${self:resources.Resources.oneAtTheWheel.Properties.BucketName}
+    ONE_AT_THE_WHEEL_DATA_BUCKET: ${self:resources.Resources.oneAtTheWheelData.Properties.BucketName}
 
 functions:
   api:
@@ -28,3 +30,7 @@ resources:
       Type: AWS::S3::Bucket
       Properties:
         BucketName: one-at-the-wheel
+    oneAtTheWheelData:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: one-at-the-wheel-data
