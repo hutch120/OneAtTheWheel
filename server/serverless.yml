@@ -28,7 +28,7 @@ functions:
 
 resources:
   Resources:
-  oneAtTheWheel:
+    oneAtTheWheel:
       Type: AWS::S3::Bucket
       Properties:
         BucketName: ${self:custom.oneAtTheWheelBucketName}
