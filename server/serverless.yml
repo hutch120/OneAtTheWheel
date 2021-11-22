@@ -1,7 +1,10 @@
-org: polynize
+org: hutch120
 app: one-at-the-wheel
 service: one-at-the-wheel
 frameworkVersion: '2'
+
+custom:
+  oneAtTheWheelBucketName: "one-at-the-wheel"
 
 provider:
   name: aws
@@ -15,7 +18,7 @@ provider:
           Action:
             - s3:*
   environment:
-    ONE_AT_THE_WHEEL_BUCKET: ${self:resources.Resources.oneAtTheWheel.Properties.BucketName}
+    ONE_AT_THE_WHEEL_BUCKET: ${self:custom.oneAtTheWheelBucketName}
 
 functions:
   api:
@@ -28,4 +31,4 @@ resources:
   oneAtTheWheel:
       Type: AWS::S3::Bucket
       Properties:
-        BucketName: one-at-the-wheel
+        BucketName: ${self:custom.oneAtTheWheelBucketName}
