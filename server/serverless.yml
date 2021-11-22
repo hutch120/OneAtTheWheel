@@ -12,8 +12,8 @@ provider:
     role:
       statements:
         - Effect: Allow
-        Action:
-          - s3:*
+          Action:
+            - s3:*
   environment:
     ONE_AT_THE_WHEEL_BUCKET: ${self:resources.Resources.oneAtTheWheel.Properties.BucketName}
 
