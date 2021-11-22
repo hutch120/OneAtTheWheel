@@ -25,10 +25,3 @@ functions:
     handler: handler.handler
     events:
       - httpApi: '*'
-
-resources:
-  Resources:
-  oneAtTheWheel:
-      Type: AWS::S3::Bucket
-      Properties:
-        BucketName: ${self:custom.oneAtTheWheelBucketName}
