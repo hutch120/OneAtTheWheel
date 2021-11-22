@@ -3,9 +3,6 @@ app: one-at-the-wheel
 service: one-at-the-wheel
 frameworkVersion: '2'
 
-custom:
-  oneAtTheWheelBucketName: "one-at-the-wheel"
-
 provider:
   name: aws
   region: ap-southeast-2
@@ -17,7 +14,7 @@ provider:
         - s3:*
       Resource: "*"
   environment:
-    ONE_AT_THE_WHEEL_BUCKET: ${self:custom.oneAtTheWheelBucketName}
+    ONE_AT_THE_WHEEL_BUCKET: ${self:resources.Resources.oneAtTheWheel.Properties.BucketName}
 
 functions:
   api:
@@ -30,4 +27,4 @@ resources:
     oneAtTheWheel:
       Type: AWS::S3::Bucket
       Properties:
-        BucketName: ${self:custom.oneAtTheWheelBucketName}
+        BucketName: one-at-the-wheel
