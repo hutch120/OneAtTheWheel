@@ -1,17 +1,11 @@
 {
-  "name": "polynize-digital-data-api",
+  "name": "one-at-the-wheel",
   "version": "1.0.0",
   "description": "",
   "dependencies": {
-    "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "express": "^4.17.1",
-    "jsonwebtoken": "^8.5.1",
-    "mssql": "^7.2.1",
-    "passport": "^0.5.0",
-    "passport-jwt": "^4.0.0",
-    "serverless-http": "^2.7.0",
-    "uuid": "^8.3.2"
+    "serverless-http": "^2.7.0"
   },
   "devDependencies": {
     "eslint": "^7.32.0",
@@ -25,11 +19,7 @@
     "supertest": "^6.1.6"
   },
   "scripts": {
-    "start": "nodemon handler.local.js",
     "test": "jest --coverage",
-    "testmon": "jest --watchAll",
-    "testSingle": "jest -t 'deleteUserByEmail' --watch",
-    "test-user-routes": "jest -t 'UserRoutes'",
-    "testGame": "jest -t 'Game'"
+    "testmon": "jest --watchAll"
   }
 }
