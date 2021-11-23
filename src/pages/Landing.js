@@ -42,6 +42,7 @@ export function Landing ({ setRoute }) {
     listCourses()
   }, [])
 
+  console.log('courses', courses)
   return (
     <Wrapper>
       <Header setRoute={setRoute} />

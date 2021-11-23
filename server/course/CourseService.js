@@ -3,7 +3,7 @@ const s3Utils = require('../awsutils/s3Utils')
 async function listCourses () {
   const response = await s3Utils.listFiles()
   if (response.success) {
-    return { success: true }
+    return { success: true, data: response.data }
   } else {
     return { success: false, error: response?.error ?? '', message: 'Failed to list courses from AWS S3.' }
   }
