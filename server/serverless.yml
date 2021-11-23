@@ -15,7 +15,7 @@ provider:
       Action:
         - s3:*
       Resource: "arn:aws:s3:::${self:resources.Resources.oneAtTheWheelData.Properties.BucketName}/*"
-  - Effect: Allow
+    - Effect: Allow
       Action:
         - s3:*
       Resource: "arn:aws:s3:::${self:resources.Resources.oneAtTheWheelData.Properties.BucketName}"      
