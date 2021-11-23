@@ -63,6 +63,11 @@ describe('Routes', () => {
       expect(response.body.success).toBe(true)
     })
 
+    it('should list courses', async () => {
+      const response = await request(server).post('/course/list').send()
+      expect(response.body.success).toBe(true)
+    })
+
     it('should not delete course data for invalid name', async () => {
       const response = await request(server).post('/course/delete').send()
       expect(response.body.success).toBe(false)

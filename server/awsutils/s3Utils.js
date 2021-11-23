@@ -2,6 +2,27 @@ const AWS = require('aws-sdk')
 
 const bucket = 'one-at-the-wheel-data'
 
+async function listFiles () {
+  const s3 = new AWS.S3()
+  const listParams = {
+    Bucket: bucket
+    // Prefix: '' // add file filter if required ... maybe we could have something like public- ??
+  }
+  try { // You should always catch your errors when using async/await
+    const listedObjects = await s3.listObjectsV2(listParams).promise()
+    console.log('listedObjects', listedObjects)
+    return { success: true, data: listedObjects }
+    /* if (listedObjects.Contents.length > 0) {
+      listedObjects.Contents.forEach(({ Key }) => {
+        deleteParams.Delete.Objects.push({ Key })
+      })
+    } */
+  } catch (error) {
+    console.log('error', error)
+    return { success: false, error }
+  }
+}
+
 async function createFile ({ filename, data }) {
   const s3 = new AWS.S3()
   const params = {
@@ -16,6 +37,10 @@ async function createFile ({ filename, data }) {
     console.log('error', error)
     return { success: false, error }
   }
+}
+
+async function updateFile ({ filename, data }) {
+  return await createFile({ filename, data })
 }
 
 async function readFile ({ filename, data }) {
@@ -51,7 +76,9 @@ async function deleteFile ({ filename, data }) {
 }
 
 module.exports = {
+  listFiles,
   createFile,
   readFile,
+  updateFile,
   deleteFile
 }

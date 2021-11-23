@@ -15,6 +15,7 @@ module.exports.Initialize = function () {
   server.use(express.json())
 
   // # Course
+  server.post('/course/list', async (req, res) => await ret({ res, req, func: CourseRoutes.listCourses }))
   server.post('/course/create', async (req, res) => await ret({ res, req, func: CourseRoutes.createCourse }))
   server.post('/course/read', async (req, res) => await ret({ res, req, func: CourseRoutes.readCourse }))
   server.post('/course/update', async (req, res) => await ret({ res, req, func: CourseRoutes.updateCourse }))

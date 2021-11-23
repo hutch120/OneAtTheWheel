@@ -1,5 +1,14 @@
 const s3Utils = require('../awsutils/s3Utils')
 
+async function listCourses () {
+  const response = await s3Utils.listFiles()
+  if (response.success) {
+    return { success: true }
+  } else {
+    return { success: false, message: 'Failed to list courses from AWS S3.' }
+  }
+}
+
 async function createCourse ({ name, data }) {
   if (!name || name === '') return { success: false }
   const filename = `${name}.json`
@@ -38,6 +47,7 @@ async function deleteCourse ({ name }) {
 }
 
 module.exports = {
+  listCourses,
   createCourse,
   readCourse,
   updateCourse,
