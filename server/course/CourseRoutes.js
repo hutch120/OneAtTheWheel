@@ -1,10 +1,30 @@
 const CourseService = require('./CourseService')
 
-async function getCourse ({ req }) {
+async function createCourse ({ req }) {
   const name = req?.body?.name ?? ''
-  return await CourseService.getCourse({ name })
+  const data = req?.body?.data ?? {}
+  return await CourseService.createCourse({ name, data })
+}
+
+async function readCourse ({ req }) {
+  const name = req?.body?.name ?? ''
+  return await CourseService.readCourse({ name })
+}
+
+async function updateCourse ({ req }) {
+  const name = req?.body?.name ?? ''
+  const data = req?.body?.data ?? ''
+  return await CourseService.updateCourse({ name, data })
+}
+
+async function deleteCourse ({ req }) {
+  const name = req?.body?.name ?? ''
+  return await CourseService.deleteCourse({ name })
 }
 
 module.exports = {
-  getCourse
+  createCourse,
+  readCourse,
+  updateCourse,
+  deleteCourse
 }

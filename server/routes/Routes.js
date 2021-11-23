@@ -14,9 +14,11 @@ module.exports.Initialize = function () {
   server.use(cors())
   server.use(express.json())
 
-  // # Account
-  // Get account details from phrase
-  server.post('/getcourse', async (req, res) => await ret({ res, req, func: CourseRoutes.getCourse }))
+  // # Course
+  server.post('/course/create', async (req, res) => await ret({ res, req, func: CourseRoutes.createCourse }))
+  server.post('/course/read', async (req, res) => await ret({ res, req, func: CourseRoutes.readCourse }))
+  server.post('/course/update', async (req, res) => await ret({ res, req, func: CourseRoutes.updateCourse }))
+  server.post('/course/delete', async (req, res) => await ret({ res, req, func: CourseRoutes.deleteCourse }))
 
   // Must be after all other routes.
   // Catch all
