@@ -104,9 +104,10 @@ export function Header ({ route, setRoute }) {
       <HeaderDiv>
         <HomeButton onClick={() => onClickHome({ setRoute })}><Title><LogoHome src='images/home.svg' /><Stretch /><LogoWheel src='images/ship-wheel.svg' />One At The Wheel</Title></HomeButton>
         <Stretch />
-        {route?.id !== ROUTES.createcourse &&
+        {route?.id === ROUTES.landing &&
           <CreateButton onClick={() => onClickCreate({ setRoute })}><LogoCreate src='images/create.svg' /></CreateButton>}
-        <HelpButton onClick={() => onClickInfo({ setRoute })}><LogoHelp src='images/help.svg' /></HelpButton>
+        {route?.id === ROUTES.landing &&
+          <HelpButton onClick={() => onClickInfo({ setRoute })}><LogoHelp src='images/help.svg' /></HelpButton>}
       </HeaderDiv>
     </Wrapper>
   )

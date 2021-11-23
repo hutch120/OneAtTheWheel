@@ -96,9 +96,10 @@ function moveFeature ({ _features, forceUpdate }) {
   forceUpdate()
 }
 
-function MapCallback ({ evt, features, forceUpdate }) {
+function MapCallback ({ evt, forceUpdate }) {
   switch (evt.type) {
     case MapEvents.FeaturesSelected:
+
       break
     case MapEvents.MapMoved:
       break
