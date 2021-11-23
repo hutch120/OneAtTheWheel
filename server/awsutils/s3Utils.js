@@ -10,7 +10,7 @@ async function listFiles () {
   }
   try { // You should always catch your errors when using async/await
     const listedObjects = await s3.listObjectsV2(listParams).promise()
-    console.log('listedObjects', listedObjects)
+    // console.log('listedObjects', listedObjects)
     return { success: true, data: listedObjects }
     /* if (listedObjects.Contents.length > 0) {
       listedObjects.Contents.forEach(({ Key }) => {
@@ -18,7 +18,6 @@ async function listFiles () {
       })
     } */
   } catch (error) {
-    console.log('error', error)
     return { success: false, error }
   }
 }

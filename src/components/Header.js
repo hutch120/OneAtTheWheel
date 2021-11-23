@@ -35,6 +35,10 @@ const LogoHelp = styled.img`
 width: 25px;
 `
 
+const LogoCreate = styled.img`
+width: 25px;
+`
+
 const LogoWheel = styled.img`
 margin-right: 10px;
 width: 25px;
@@ -72,6 +76,11 @@ cursor: pointer;
 float: right;
 `
 
+const CreateButton = styled.div`
+cursor: pointer;
+float: right;
+`
+
 export const HeaderBuffer = styled.div`
 padding-top: 50px;
 `
@@ -84,12 +93,17 @@ function onClickInfo ({ setRoute }) {
   updateRoute({ key: ROUTES.info, value: '', setRoute })
 }
 
+function onClickCreate ({ setRoute }) {
+  updateRoute({ key: ROUTES.createcourse, value: '', setRoute })
+}
+
 export function Header ({ setRoute }) {
   return (
     <Wrapper>
       <HeaderDiv>
         <HomeButton onClick={() => onClickHome({ setRoute })}><Title><LogoHome src='images/home.svg' /><Stretch /><LogoWheel src='images/ship-wheel.svg' />One At The Wheel</Title></HomeButton>
         <Stretch />
+        <CreateButton onClick={() => onClickCreate({ setRoute })}><LogoCreate src='images/create.svg' /></CreateButton>
         <HelpButton onClick={() => onClickInfo({ setRoute })}><LogoHelp src='images/help.svg' /></HelpButton>
       </HeaderDiv>
     </Wrapper>

@@ -5,7 +5,7 @@ async function listCourses () {
   if (response.success) {
     return { success: true }
   } else {
-    return { success: false, message: 'Failed to list courses from AWS S3.' }
+    return { success: false, error: response?.error ?? '', message: 'Failed to list courses from AWS S3.' }
   }
 }
 

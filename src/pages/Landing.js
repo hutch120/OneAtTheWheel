@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { Header, HeaderBuffer } from '../components/Header'
 import { updateRoute, ROUTES } from './Routes'
+import { FilterableList } from '../components/FilterableList'
+import * as s3Utils from '../awsutils/s3Utils'
 
 const Wrapper = styled.div`
 position: absolute;
@@ -24,54 +26,27 @@ background-size: cover;
 z-index: -2;
 `
 
-const ButtonWrapper = styled.div`
-padding-top: 20px;
-`
-
-const Button = styled.a`
-display: inline-block;
-box-sizing: border-box;
-cursor: pointer;
-font-style: inherit;
-font-variant: inherit;
-font-stretch: inherit;
-font-family: inherit;
-text-decoration: none;
-margin: 0px;
-background: rgb(125, 76, 219);
-overflow: visible;
-text-transform: none;
-border: 2px solid rgb(125, 76, 219);
-padding: 4px 22px;
-font-size: 18px;
-line-height: 24px;
-color: rgb(248, 248, 248);
-border-radius: 18px;
-transition-property: color, background-color, border-color, box-shadow;
-transition-duration: 0.1s;
-transition-timing-function: ease-in-out;
-font-weight: bold;
-`
-
-function onClickShowACourse ({ setRoute }) {
-  updateRoute({ key: ROUTES.viewcourse, value: '123', setRoute })
-}
-
-function onClickCreateACourse ({ setRoute }) {
-  updateRoute({ key: ROUTES.createcourse, value: '', setRoute })
+function onClickShowACourse ({ setRoute, course }) {
+  updateRoute({ key: ROUTES.viewcourse, value: course, setRoute })
 }
 
 export function Landing ({ setRoute }) {
+  const [courses, setCourses] = useState()
+
+  async function listCourses () {
+    const response = await s3Utils.listCourses()
+    setCourses(response.data)
+  }
+
+  useEffect(() => {
+    listCourses()
+  }, [])
+
   return (
     <Wrapper>
       <Header setRoute={setRoute} />
       <HeaderBuffer />
-      <ButtonWrapper>
-        <Button onClick={() => onClickShowACourse({ setRoute })}>View course</Button>
-      </ButtonWrapper>
-      <ButtonWrapper>
-        <Button onClick={() => onClickCreateACourse({ setRoute })}>Create course</Button>
-      </ButtonWrapper>
+      <FilterableList list={['a', 'b']} onClickRow={onClickShowACourse} />
       <Background />
     </Wrapper>
   )
