@@ -2,6 +2,7 @@ import React, { useState, useCallback } from 'react'
 import BlueTrackMap, { MapEvents } from 'bluetrack/BlueTrackMap'
 import styled from 'styled-components'
 import { Header } from '../components/Header'
+// import * as s3Utils from '../awsutils/s3Utils'
 
 const Page = styled.div`
 height: 100vh;
@@ -24,8 +25,22 @@ max-width: 100vw;
 color: grey;
 `
 
+const Button = styled.button`
+position: absolute;
+bottom: 20px;
+left: 20px;
+background: transparent;
+border-radius: 6px;
+border: 2px solid #626262;
+margin: 2px;
+padding: 6px;
+background: #cfcfcf;
+color: black;
+font-size: 20px;
+`
+
 let features = []
-export function CreateCourse ({ setRoute }) {
+export function CreateCourse ({ route, setRoute }) {
   const [, updateState] = useState()
   const forceUpdate = useCallback(() => updateState({}), [])
 
@@ -51,13 +66,18 @@ export function CreateCourse ({ setRoute }) {
     ]
   }
 
+  async function saveCourse () {
+    // const response = await s3Utils.createCourse()
+  }
+
   return (
     <Page>
-      <Header setRoute={setRoute} />
+      <Header route={route} setRoute={setRoute} />
       <MapSection>
         <BlueTrackMap MapOptions={MapOptions} MapCallback={(evt) => MapCallback({ evt, forceUpdate })} />
       </MapSection>
       <Instructions>Click/Press on map to create each waypoint (approx) Edit lat/lng after if required.</Instructions>
+      <Button onClick={() => saveCourse()}>Save</Button>
     </Page>
   )
 }

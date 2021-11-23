@@ -1,22 +1,21 @@
-import React, { useState } from 'react'
+import { Select } from 'react-functional-select'
+import { useCallback } from 'react'
 
-export function FilterableList ({ list }) {
-  const [filterStr, setfilterStr] = useState('')
-
-  if (!list) return 'Invalid list'
-  const filteredList = list.filter(e => e.includes(filterStr))
+export function FilterableList ({ list, onClickItem }) {
+  const getOptionValue = useCallback((option) => option.id, [])
+  const onOptionChange = useCallback((option) => onClickItem(option.course), [onClickItem])
+  const getOptionLabel = useCallback((option) => `${option.course}`, [])
 
   return (
-    <div>
-      <input
-        type='text'
-        value={filterStr}
-        onChange={e => setfilterStr(e.target.value)}
-      />
-      <ul>
-        {(filteredList.length === 0) && <li>No data</li>}
-        {filteredList.map(e => <li>{e}</li>)}
-      </ul>
-    </div>
+    <Select
+      placeholder='Select Course ...'
+      isClearable
+      isInvalid={false}
+      options={list}
+      isDisabled={false}
+      onOptionChange={onOptionChange}
+      getOptionValue={getOptionValue}
+      getOptionLabel={getOptionLabel}
+    />
   )
 }

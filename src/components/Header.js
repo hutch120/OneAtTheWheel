@@ -97,13 +97,15 @@ function onClickCreate ({ setRoute }) {
   updateRoute({ key: ROUTES.createcourse, value: '', setRoute })
 }
 
-export function Header ({ setRoute }) {
+export function Header ({ route, setRoute }) {
+  console.log('route', route)
   return (
     <Wrapper>
       <HeaderDiv>
         <HomeButton onClick={() => onClickHome({ setRoute })}><Title><LogoHome src='images/home.svg' /><Stretch /><LogoWheel src='images/ship-wheel.svg' />One At The Wheel</Title></HomeButton>
         <Stretch />
-        <CreateButton onClick={() => onClickCreate({ setRoute })}><LogoCreate src='images/create.svg' /></CreateButton>
+        {route?.id !== ROUTES.createcourse &&
+          <CreateButton onClick={() => onClickCreate({ setRoute })}><LogoCreate src='images/create.svg' /></CreateButton>}
         <HelpButton onClick={() => onClickInfo({ setRoute })}><LogoHelp src='images/help.svg' /></HelpButton>
       </HeaderDiv>
     </Wrapper>

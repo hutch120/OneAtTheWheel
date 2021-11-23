@@ -58,10 +58,10 @@ transition-timing-function: ease-in-out;
 font-weight: bold;
 `
 
-export function Info ({ setRoute }) {
+export function Info ({ route, setRoute }) {
   return (
     <Wrapper>
-      <Header setRoute={setRoute} />
+      <Header route={route} setRoute={setRoute} />
       <HeaderBuffer />
       <About>
         This is a little project I wrote to assist in figuring out the marks for yacht racing on Port Phillip Bay.

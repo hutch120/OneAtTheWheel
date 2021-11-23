@@ -60,7 +60,7 @@ export function Routes () {
     }
   }, [])
 
-  const args = { ...route, setRoute, updateRoute }
+  const args = { route, setRoute, updateRoute }
   if (!route?.id) return null
 
   return (

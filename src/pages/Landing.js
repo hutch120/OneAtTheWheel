@@ -26,16 +26,28 @@ background-size: cover;
 z-index: -2;
 `
 
+const FilterableListWrapper = styled.div`
+padding: 20px;
+`
+
 function onClickShowACourse ({ setRoute, course }) {
   updateRoute({ key: ROUTES.viewcourse, value: course, setRoute })
 }
 
-export function Landing ({ setRoute }) {
-  const [courses, setCourses] = useState()
+export function Landing ({ route, setRoute }) {
+  const [courses, setCourses] = useState(null)
 
   async function listCourses () {
     const response = await s3Utils.listCourses()
-    setCourses(response.data)
+    const _courses = []
+    if (response.success) {
+      const contents = response?.data?.Contents
+      for (let i = 0; i < contents.length; i++) {
+        const keyRemoveExtension = contents[i].Key.replace('.json', '')
+        _courses.push({ id: i, course: keyRemoveExtension })
+      }
+    }
+    setCourses(_courses)
   }
 
   useEffect(() => {
@@ -45,9 +57,13 @@ export function Landing ({ setRoute }) {
   console.log('courses', courses)
   return (
     <Wrapper>
-      <Header setRoute={setRoute} />
+      <Header route={route} setRoute={setRoute} />
       <HeaderBuffer />
-      <FilterableList list={['a', 'b']} onClickRow={onClickShowACourse} />
+      {!courses && <div>Loading Courses...</div>}
+      {courses &&
+        <FilterableListWrapper>
+          <FilterableList list={courses} onClickItem={(course) => onClickShowACourse({ setRoute, course })} />
+        </FilterableListWrapper>}
       <Background />
     </Wrapper>
   )
