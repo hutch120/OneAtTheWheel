@@ -1,5 +1,5 @@
-import { Routes } from './pages/Routes'
+import { OneRoutes } from './pages/OneRoutes'
 
 export default function App () {
-  return <Routes />
+  return <OneRoutes />
 }

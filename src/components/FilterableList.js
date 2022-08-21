@@ -1,4 +1,3 @@
-import { Select } from 'react-functional-select'
 import { useCallback } from 'react'
 
 export function FilterableList ({ list, onClickItem }) {
@@ -7,7 +6,7 @@ export function FilterableList ({ list, onClickItem }) {
   const getOptionLabel = useCallback((option) => `${option.course}`, [])
 
   return (
-    <Select
+    <select
       placeholder='Select Course ...'
       isClearable
       isInvalid={false}
