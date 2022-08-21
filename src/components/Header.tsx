@@ -71,19 +71,14 @@ export function Header() {
                   <Link to="/">Home</Link>
                 </li>
                 <li className="text-white hover:text-indigo-200">
-                  <Link to="/">View Course</Link>
-                </li>
-                <li className="text-white hover:text-indigo-200">
                   <Link to="/new">New Course</Link>
                 </li>
                 <li className="text-white hover:text-indigo-200">
                   <Link to="/about">About</Link>
                 </li>
-                <li className="text-white hover:text-indigo-200">
-                  <Link to="/">Contact</Link>
-                </li>
               </ul>
 
+              {/*
               <div className="mt-3 space-y-2 lg:hidden md:inline-block">
                 <Link
                   to="/"
@@ -98,8 +93,10 @@ export function Header() {
                   Sign up
                 </Link>
               </div>
+              */}
             </div>
           </div>
+          {/*
           <div className="hidden space-x-2 md:inline-block">
             <Link
               to="/"
@@ -114,6 +111,7 @@ export function Header() {
               Sign up
             </Link>
           </div>
+          */}
         </div>
       </nav>
     </div>

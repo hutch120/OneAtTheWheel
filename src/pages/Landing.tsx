@@ -1,40 +1,70 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { Header } from '../components/Header'
-import * as s3Utils from '../awsutils/s3Utils'
+import { SelectBox, ISelectBoxItem } from '../components/SelectBox'
+import { Link } from 'react-router-dom'
+
+const testCourses: ISelectBoxItem[] = [
+  {
+    key: '',
+    value: 'Select a course...',
+    item: {}
+  },
+  {
+    key: '1',
+    value: 'Course 1',
+    item: {
+      marks: []
+    }
+  },
+  {
+    key: '2',
+    value: 'Course 2',
+    item: {
+      marks: []
+    }
+  }
+]
 
 export function Landing() {
-  const [courses, setCourses] = useState(null)
+  const [courses] = useState<ISelectBoxItem[]>(testCourses)
+  const [course, setCourse] = useState<ISelectBoxItem>({
+    key: '',
+    value: 'Loading courses, please wait...',
+    item: {}
+  })
 
-  async function listCourses() {
-    const response = await s3Utils.listCourses()
-    const _courses: any = []
-    if (response.success) {
-      const contents = response?.data?.Contents
-      for (let i = 0; i < contents.length; i++) {
-        const keyRemoveExtension = contents[i].Key.replace('.json', '')
-        _courses.push({ id: i, course: keyRemoveExtension })
-      }
-    }
-    setCourses(_courses)
-  }
+  const bCourseSelected = course?.key !== ''
+  const selectedCourseUrl = `/view/${course?.key}`
 
-  useEffect(() => {
-    listCourses()
-  }, [])
-
-  console.log('courses', courses)
   return (
     <div>
       <Header />
+      <div className="pl-5 pr-5 pt-5 max-w-sm">
+        {courses && (
+          <SelectBox
+            title=""
+            description=""
+            updateState={setCourse}
+            item={course}
+            options={courses}
+          />
+        )}
+      </div>
       <div className="p-5">
-        <div>WIP: Pick a course...</div>
+        <Link to={selectedCourseUrl}>
+          {bCourseSelected && (
+            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+              View Course
+            </button>
+          )}
+        </Link>
       </div>
       <div className="p-5">
         <div>
-          This is a little project I wrote to assist in figuring out the marks for yacht racing on
-          Port Phillip Bay. I've made it public, but I give no warrantee or fitness for any purpose.
-          If you do like it, please let me know on LinkedIn. If you have a feature suggestion please
-          add it to Github Issues.
+          The goal of this project is to assist in navigating to marks, in particular for yacht
+          racing on Port Phillip Bay. It might be useful for other usecases, that's why I've made it
+          public, but I give no warrantee or fitness for any purpose. If you do like it, please let
+          me know on LinkedIn. If you have a feature suggestion please add it to Github Issues.
         </div>
         <div className="pt-5 p-2">
           <a href="https://github.com/hutch120/OneAtTheWheel/blob/main/LICENSE">
