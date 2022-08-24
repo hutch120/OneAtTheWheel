@@ -1,20 +1,21 @@
-import { OneMap } from 'components/OneMap'
-import { Header } from '../components/Header'
+import { Layout } from './Layout'
 
 export function CreateCourse() {
-  const mapOptions = {
-    center: {
-      lon: 144.9125673219142,
-      lat: -37.99704788855863
-    },
-    zoom: 10
-  }
   return (
-    <div>
-      <Header />
-      <div className="absolute top-16 left-0 right-0 bottom-0 z-10">
-        <OneMap mapOptions={mapOptions} />
+    <Layout>
+      <div className="p-5">
+        <div>
+          Like this project, want to create some awesome courses to use here? Get in contact, maybe
+          throw in some funding.
+        </div>
+        <div className="p-2">
+          <a href="https://www.linkedin.com/in/simonhutchison1/">
+            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+              LinkedIn
+            </button>
+          </a>
+        </div>
       </div>
-    </div>
+    </Layout>
   )
 }

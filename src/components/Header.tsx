@@ -12,8 +12,7 @@ export function Header() {
 
   return (
     <div>
-      <div className="pt-16"></div>
-      <nav className="absolute top-0 left-0 right-0 bg-blue-500 shadow z-20">
+      <nav className="bg-blue-500 shadow z-20">
         <div className="justify-between px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8 bg-blue-500">
           <div>
             <div className="flex items-center justify-between py-3 md:py-5 md:block">

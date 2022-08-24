@@ -1,15 +1,14 @@
-import { Header } from '../components/Header'
+import { Layout } from './Layout'
 
 export function About() {
   return (
-    <div>
-      <Header />
+    <Layout>
       <div className="p-5">
         <div>
-          This is a little project I wrote to assist in figuring out the marks for yacht racing on
-          Port Phillip Bay. I've made it public, but I give no warrantee or fitness for any purpose.
-          If you do like it, please let me know on LinkedIn. If you have a feature suggestion please
-          add it to Github Issues.
+          I wrote this application to assist in attempting to assist in racing to marks for yacht
+          racing on Port Phillip Bay. I've made it public, but I give no warrantee or fitness for
+          any purpose. If you do like it, please let me know on LinkedIn. If you have a feature
+          suggestion please add it to Github Issues.
         </div>
         <div className="pt-5 p-2">
           <a href="https://github.com/hutch120/OneAtTheWheel/blob/main/LICENSE">
@@ -33,6 +32,6 @@ export function About() {
           </a>
         </div>
       </div>
-    </div>
+    </Layout>
   )
 }
