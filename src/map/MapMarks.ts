@@ -1,11 +1,11 @@
 import { Map } from 'ol'
 import Point from 'ol/geom/Point'
 import Feature from 'ol/Feature'
-import { Circle as CircleStyle, Fill, Stroke, Style } from 'ol/style'
+import { Circle as CircleStyle, Fill, Stroke, Style, Text } from 'ol/style'
 import { fromLonLat } from 'ol/proj'
 import VectorSource from 'ol/source/Vector'
 import { Vector as VectorLayer } from 'ol/layer'
-import { ICourse } from './courses'
+import { EMarkPassTo, ICourse } from './courses'
 import Geometry from 'ol/geom/Geometry'
 
 interface IInitMapMarks {
@@ -17,15 +17,67 @@ export function InitMapMarks({ map, course }: IInitMapMarks) {
   const instructions = course.instructions
   const features: Feature<Geometry>[] = []
   for (let index = 0; index < instructions.length; index++) {
-    const element = instructions[index]
-    const lon = element.mark.lon
-    const lat = element.mark.lat
+    const instruction = instructions[index]
+    const mark = instruction.mark
+    const lon = mark.lon
+    const lat = mark.lat
     const position = new Point(fromLonLat([lon, lat]))
+    const order = index + 1
 
-    const style: Style = new Style({
+    let markColor = 'grey'
+    if (instruction.passTo === EMarkPassTo.port) {
+      markColor = 'red'
+    } else if (instruction.passTo === EMarkPassTo.starboard) {
+      markColor = 'green'
+    }
+    const styleDot: Style = new Style({
       image: new CircleStyle({
         radius: 10,
-        fill: new Fill({ color: 'green' }),
+        fill: new Fill({ color: markColor }),
+        stroke: new Stroke({
+          color: 'white',
+          width: 2
+        })
+      })
+    })
+
+    const styleMarkName: Style = new Style({
+      text: new Text({
+        text: mark.name,
+        textAlign: 'left',
+        offsetX: 15,
+        fill: new Fill({
+          color: 'black'
+        }),
+        stroke: new Stroke({
+          color: 'white',
+          width: 2
+        })
+      })
+    })
+
+    const styleMarkPassTo: Style = new Style({
+      text: new Text({
+        text: instruction.passTo,
+        textAlign: 'left',
+        offsetY: 10,
+        offsetX: 15,
+        fill: new Fill({
+          color: 'black'
+        }),
+        stroke: new Stroke({
+          color: 'white',
+          width: 2
+        })
+      })
+    })
+
+    const styleMarkOrder: Style = new Style({
+      text: new Text({
+        text: order + '',
+        fill: new Fill({
+          color: 'black'
+        }),
         stroke: new Stroke({
           color: 'white',
           width: 2
@@ -37,7 +89,7 @@ export function InitMapMarks({ map, course }: IInitMapMarks) {
       type: 'geoMarker',
       geometry: position
     })
-    markFeature.setStyle(style)
+    markFeature.setStyle([styleDot, styleMarkName, styleMarkPassTo, styleMarkOrder])
     features.push(markFeature)
   }
 

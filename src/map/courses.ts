@@ -8,6 +8,7 @@ export enum EMarkPassTo {
 }
 
 interface IMark {
+  id: string
   name: string
   lon: number
   lat: number
@@ -42,7 +43,7 @@ const marks = {
     lat: -37.863333
   },
   hybc_r4: {
-    id: '',
+    id: 'r4',
     name: 'R4 Yellow Buoy',
     lon: 144.922667,
     lat: -37.845
