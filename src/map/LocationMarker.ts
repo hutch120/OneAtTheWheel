@@ -6,15 +6,13 @@ import { fromLonLat } from 'ol/proj'
 import VectorSource from 'ol/source/Vector'
 import { Vector as VectorLayer } from 'ol/layer'
 
-interface IShowLocationMarker {
-  lon: number
-  lat: number
+interface IInitLocationMarker {
   map: Map
 }
 
 let geoMarker: Feature | null = null
 
-export function ShowLocationMarker({ map, lon, lat }: IShowLocationMarker) {
+export function InitLocationMarker({ map }: IInitLocationMarker) {
   const geoMarkerStyle: Style = new Style({
     image: new CircleStyle({
       radius: 10,
@@ -26,11 +24,9 @@ export function ShowLocationMarker({ map, lon, lat }: IShowLocationMarker) {
     })
   })
 
-  const position = new Point(fromLonLat([lon, lat]))
-
   geoMarker = new Feature({
     type: 'geoMarker',
-    geometry: position
+    geometry: undefined
   })
 
   const vectorLayer = new VectorLayer({
@@ -41,6 +37,18 @@ export function ShowLocationMarker({ map, lon, lat }: IShowLocationMarker) {
   })
 
   map.addLayer(vectorLayer)
+
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(updatePosition, updatePositionErr)
+    const watchId = navigator.geolocation.watchPosition(updatePosition, updatePositionErr, {
+      enableHighAccuracy: true,
+      maximumAge: 15000,
+      timeout: 12000
+    })
+    console.log('position watchId', watchId)
+  }
+
+  return { success: true, message: 'Location Marker Initalised.' }
 }
 
 interface IUpdateLocationMarker {
@@ -53,4 +61,15 @@ export function UpdateLocationMarker({ lon, lat }: IUpdateLocationMarker) {
     const position = new Point(fromLonLat([lon, lat]))
     geoMarker.setGeometry(position)
   }
+}
+
+function updatePosition(position: GeolocationPosition) {
+  // const { accuracy, altitude, altitudeAccuracy, heading, latitude, longitude, speed } =  position.coords
+  // const timestamp = position.timestamp
+  const { latitude, longitude } = position.coords
+  UpdateLocationMarker({ lon: longitude, lat: latitude })
+}
+
+function updatePositionErr(positionError: GeolocationPositionError) {
+  console.log('Position update error', positionError)
 }

@@ -1,7 +1,7 @@
 import 'ol/ol.css'
 import { useEffect, useState } from 'react'
 import { Map } from 'ol'
-import { InitMap } from '../map/InitMap'
+import { InitMapCore } from '../map/MapCore'
 
 export interface IOneMap {
   courseId: string
@@ -15,7 +15,7 @@ export function OneMap({ courseId, follow }: IOneMap) {
   useEffect(() => {
     const map = new Map()
     map.setTarget('map')
-    const InitMapRes = InitMap({ map, courseId, follow })
+    const InitMapRes = InitMapCore({ map, courseId, follow })
     console.log('InitMapRes', InitMapRes)
     if (!InitMapRes?.success) {
       setLoadFailed(true)
