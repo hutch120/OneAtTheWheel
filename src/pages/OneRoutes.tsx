@@ -11,7 +11,7 @@ export function OneRoutes() {
         <Route path="/landing" element={<Landing />} />
         <Route path="/home" element={<Landing />} />
         <Route path="/" element={<Landing />} />
-        <Route path="/view/:course" element={<ViewCourse />} />
+        <Route path="/view/:courseId" element={<ViewCourse />} />
         <Route path="/new" element={<CreateCourse />} />
         <Route path="/about" element={<About />} />
         <Route path="*" element={<Landing />} />

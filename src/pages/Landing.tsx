@@ -1,48 +1,20 @@
-import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Layout } from './Layout'
-
-enum EMarkSideTo {
-  port = 'port',
-  starboard = 'starboard'
-}
-
-interface ICourse {
-  id: string
-  name: string
-  item: {
-    mark: {
-      lon: number
-      lat: number
-      name: string
-      sideTo: EMarkSideTo
-    }[]
-  }
-}
-const testCourses: ICourse[] = [
-  {
-    id: 'course1',
-    name: 'Course 1',
-    item: {
-      mark: []
-    }
-  },
-  {
-    id: 'course2',
-    name: 'Course 2',
-    item: {
-      mark: []
-    }
-  }
-]
+import { GetCourses } from '../map/courses'
 
 export function Landing() {
-  const [courses] = useState<ICourse[]>(testCourses)
+  const courses = GetCourses()
 
   return (
     <Layout>
       <div className="p-4">
-        Select a course
+        <div className="text-lg pt-4 pb-4">
+          HBYC Brass Monkeys Port Phillip Bay courses can be found{' '}
+          <a href="https://hbyc.org.au/race-documents">
+            <span className="underline text-blue-500">here</span>
+          </a>{' '}
+          and are numbered 1 - 26.
+        </div>
         {courses.map((course) => {
           const to = `/view/${course.id}`
           return (

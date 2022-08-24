@@ -1,45 +1,31 @@
 import 'ol/ol.css'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { Map } from 'ol'
-import TileLayer from 'ol/layer/WebGLTile'
-import XYZ from 'ol/source/XYZ'
-import View from 'ol/View'
-import { fromLonLat } from 'ol/proj'
+import { useParams } from 'react-router-dom'
+import { InitMap } from '../map/map'
 
-interface IOneMap {
-  mapOptions: {
-    center: { lon: number; lat: number }
-    zoom: number
-  }
+export interface IOneMap {
+  center: { lon: number; lat: number }
+  zoom: number
 }
 
-export function OneMap({ mapOptions }: IOneMap) {
-  const source = new XYZ({
-    url: 'https://{a-c}.tile.openstreetmap.org/{z}/{x}/{y}.png'
-  })
+export function OneMap(mapOptions: IOneMap) {
+  const [loadFailed, setLoadFailed] = useState(false)
+  const { courseId } = useParams<string>()
 
-  const layer = new TileLayer({
-    source: source
-  })
+  useEffect(() => {
+    const map = new Map()
+    map.setTarget('map')
+    const InitMapRes = InitMap({ map, mapOptions, courseId })
+    if (!InitMapRes?.success) {
+      console.log('InitMapRes', InitMapRes)
+      setLoadFailed(true)
+    }
+  }, [mapOptions])
 
-  const lon = mapOptions?.center?.lon ?? 144.9125673219142
-  const lat = mapOptions?.center?.lat ?? -37.99704788855863
-  const zoom = mapOptions?.zoom ?? 2
-
-  const map = new Map({
-    layers: [layer],
-    view: new View({
-      center: fromLonLat([lon, lat]),
-      zoom
-    })
-  })
-
-  map.on('postrender', function (event) {
-    console.log(event)
-  })
-
-  useEffect(() => map.setTarget('map'))
-
+  if (!courseId || courseId === '' || loadFailed) {
+    return <div>Unable to load map!</div>
+  }
   return (
     <div style={{ height: '100%', width: '100%' }}>
       <div id="map" style={{ height: '100%', width: '100%' }}></div>

@@ -1,15 +1,8 @@
-import { OneMap } from '../components/OneMap'
-import useGeolocation from 'react-hook-geolocation'
+import { OneMap, IOneMap } from '../components/OneMap'
 import { Layout } from './Layout'
 
 export function ViewCourse() {
-  const geolocation = useGeolocation({
-    enableHighAccuracy: true,
-    maximumAge: 15000,
-    timeout: 12000
-  })
-
-  const mapOptions = {
+  const mapOptions: IOneMap = {
     center: {
       lon: 144.9125673219142,
       lat: -37.99704788855863
@@ -18,31 +11,8 @@ export function ViewCourse() {
   }
 
   return (
-    <Layout>
-      <div>
-        {!geolocation.error && (
-          <div>
-            <ul>
-              <li>Latitude: {geolocation.latitude}</li>
-              <li>Longitude: {geolocation.longitude}</li>
-              <li>Location accuracy: {geolocation.accuracy}</li>
-              <li>Altitude: {geolocation.altitude}</li>
-              <li>Altitude accuracy: {geolocation.altitudeAccuracy}</li>
-              <li>Heading: {geolocation.heading}</li>
-              <li>Speed: {geolocation.speed}</li>
-              <li>Timestamp: {geolocation.timestamp}</li>
-            </ul>
-          </div>
-        )}
-        {geolocation.error && (
-          <div>
-            <ul>
-              <li>No geo info yet... is it enabled?</li>
-            </ul>
-          </div>
-        )}
-        <OneMap mapOptions={mapOptions} />
-      </div>
+    <Layout scrollContent={false} showFooter={true}>
+      <OneMap {...mapOptions} />
     </Layout>
   )
 }

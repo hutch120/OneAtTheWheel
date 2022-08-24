@@ -1,26 +1,22 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import * as Icons from './Icons'
+import useGeolocation from 'react-hook-geolocation'
 
 // For non-map data, push data down from top header height.
 export function HeaderSpacer() {
   return <div className="h-18"></div>
 }
 
-interface IFooter {
-  mapData?: {
-    latitude: number
-    longitude: number
-    direction: number
-    heading: number
-    speed: number
-    timestamp: string
-  }
-}
-
 // From  here: https://larainfo.com/blogs/react-responsive-navbar-menu-with-tailwind-css-example
-export function Footer({ mapData }: IFooter) {
+export function Footer() {
   const [navbar, setNavbar] = useState(false)
+
+  const geolocation = useGeolocation({
+    enableHighAccuracy: true,
+    maximumAge: 15000,
+    timeout: 12000
+  })
 
   return (
     <div>
@@ -33,54 +29,52 @@ export function Footer({ mapData }: IFooter) {
                   <Icons.Help />
                 </h2>
               </Link>
-              {mapData && (
-                <div className="md:hidden">
-                  <button
-                    className="p-2 text-gray-700 rounded-md outline-none focus:border-gray-400 focus:border"
-                    onClick={() => setNavbar(!navbar)}
-                  >
-                    {navbar ? <Icons.Close /> : <Icons.Sparkles />}
-                  </button>
-                </div>
-              )}
+
+              <div className="md:hidden">
+                <button
+                  className="p-2 text-gray-700 rounded-md outline-none focus:border-gray-400 focus:border"
+                  onClick={() => setNavbar(!navbar)}
+                >
+                  {navbar ? <Icons.Close /> : <Icons.Sparkles />}
+                </button>
+              </div>
             </div>
           </div>
-          {mapData && (
-            <div>
-              <div
-                className={`flex-1 justify-self-center pb-3 mt-8 md:block md:pb-0 md:mt-0 ${
-                  navbar ? 'block' : 'hidden'
-                }`}
-              >
-                <div className="grid">
-                  <div className="p-2">
-                    <Icons.ArrowsPointingIn />
-                    <div className="inline pl-2 text-white">{mapData.latitude}</div>
-                  </div>
-                  <div className="p-2">
-                    <Icons.ArrowsPointingIn />
-                    <div className="inline pl-2 text-white">{mapData.longitude}</div>
-                  </div>
-                  <div className="p-2">
-                    <Icons.ArrowsPointingOut />
-                    <div className="inline pl-2 text-white">{mapData.direction}</div>
-                  </div>
-                  <div className="p-2">
-                    <Icons.ArrowsPointingOut />
-                    <div className="inline pl-2 text-white">{mapData.heading}</div>
-                  </div>
-                  <div className="p-2">
-                    <Icons.ArrowsPointingOut />
-                    <div className="inline pl-2 text-white">{mapData.speed}</div>
-                  </div>
-                  <div className="p-2">
-                    <Icons.ArrowsPointingOut />
-                    <div className="inline pl-2 text-white">{mapData.timestamp}</div>
-                  </div>
+
+          <div>
+            <div
+              className={`flex-1 justify-self-center pb-3 mt-8 md:block md:pb-0 md:mt-0 ${
+                navbar ? 'block' : 'hidden'
+              }`}
+            >
+              <div className="grid">
+                <div className="p-2">
+                  <Icons.ArrowsPointingIn />
+                  <div className="inline pl-2 text-white">{geolocation.latitude}</div>
+                </div>
+                <div className="p-2">
+                  <Icons.ArrowsPointingIn />
+                  <div className="inline pl-2 text-white">{geolocation.longitude}</div>
+                </div>
+                <div className="p-2">
+                  <Icons.ArrowsPointingOut />
+                  <div className="inline pl-2 text-white">{geolocation.heading}</div>
+                </div>
+                <div className="p-2">
+                  <Icons.ArrowsPointingOut />
+                  <div className="inline pl-2 text-white">{geolocation.heading}</div>
+                </div>
+                <div className="p-2">
+                  <Icons.ArrowsPointingOut />
+                  <div className="inline pl-2 text-white">{geolocation.speed}</div>
+                </div>
+                <div className="p-2">
+                  <Icons.ArrowsPointingOut />
+                  <div className="inline pl-2 text-white">{geolocation.timestamp}</div>
                 </div>
               </div>
             </div>
-          )}
+          </div>
         </div>
       </nav>
     </div>
