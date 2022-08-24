@@ -1,18 +1,23 @@
-import { OneMap, IOneMap } from '../components/OneMap'
+import { OneMap } from '../components/OneMap'
 import { Layout } from './Layout'
+import { useParams } from 'react-router-dom'
 
 export function ViewCourse() {
-  const mapOptions: IOneMap = {
-    center: {
-      lon: 144.9125673219142,
-      lat: -37.99704788855863
-    },
-    zoom: 10
+  const { courseId } = useParams<string>()
+  const { follow } = useParams<string>()
+
+  if (!courseId || courseId === '') {
+    return <div>Invalid CourseId!</div>
+  }
+
+  let bFollow = false
+  if (follow && follow === 'true') {
+    bFollow = true
   }
 
   return (
-    <Layout scrollContent={false} showFooter={true}>
-      <OneMap {...mapOptions} />
+    <Layout scrollContent={false} showMapFooter={true}>
+      <OneMap courseId={courseId} follow={bFollow} />
     </Layout>
   )
 }

@@ -1,4 +1,3 @@
-import { IOneMap } from '../components/OneMap'
 import { Map } from 'ol'
 import TileLayer from 'ol/layer/WebGLTile'
 import XYZ from 'ol/source/XYZ'
@@ -8,24 +7,16 @@ import { GetCourse } from '../map/courses'
 
 interface IInitMap {
   map: Map
-  mapOptions: IOneMap
-  courseId?: string
+  courseId: string
+  follow: boolean
 }
-export function InitMap({ map, mapOptions, courseId }: IInitMap) {
-  if (!courseId || courseId === '') {
-    return { success: false, message: 'Invalid courseId' }
-  }
-
+export function InitMap({ map, courseId, follow }: IInitMap) {
   const course = GetCourse(courseId)
   if (!course) {
     return { success: false, message: 'Unable to get course for the courseId' }
   }
 
-  /*
-  map.on('postrender', function (event) {
-    console.log(event)
-  })
-  */
+  console.log('InitMap: course', course, 'follow', follow)
 
   const attributions =
     '<a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>'

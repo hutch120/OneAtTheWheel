@@ -1,13 +1,13 @@
 import { Header } from '../components/Header'
-import { Footer } from '../components/Footer'
+import { MapFooter } from '../components/MapFooter'
 
 interface ILayout {
   children: JSX.Element | JSX.Element[]
   scrollContent?: boolean
-  showFooter?: boolean
+  showMapFooter?: boolean
 }
 
-export function Layout({ children, scrollContent = true, showFooter = false }: ILayout) {
+export function Layout({ children, scrollContent = true, showMapFooter = false }: ILayout) {
   return (
     <div className="h-screen flex flex-col">
       <Header />
@@ -23,7 +23,7 @@ export function Layout({ children, scrollContent = true, showFooter = false }: I
         </div>
       )}
 
-      {showFooter && <Footer />}
+      {showMapFooter && <MapFooter />}
     </div>
   )
 }

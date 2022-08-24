@@ -1,27 +1,26 @@
 import 'ol/ol.css'
 import { useEffect, useState } from 'react'
 import { Map } from 'ol'
-import { useParams } from 'react-router-dom'
 import { InitMap } from '../map/map'
 
 export interface IOneMap {
-  center: { lon: number; lat: number }
-  zoom: number
+  courseId: string
+  follow: boolean
 }
 
-export function OneMap(mapOptions: IOneMap) {
+export function OneMap({ courseId, follow }: IOneMap) {
   const [loadFailed, setLoadFailed] = useState(false)
-  const { courseId } = useParams<string>()
 
+  console.log('follow', follow)
   useEffect(() => {
     const map = new Map()
     map.setTarget('map')
-    const InitMapRes = InitMap({ map, mapOptions, courseId })
+    const InitMapRes = InitMap({ map, courseId, follow })
+    console.log('InitMapRes', InitMapRes)
     if (!InitMapRes?.success) {
-      console.log('InitMapRes', InitMapRes)
       setLoadFailed(true)
     }
-  }, [mapOptions])
+  }, [courseId, follow])
 
   if (!courseId || courseId === '' || loadFailed) {
     return <div>Unable to load map!</div>
