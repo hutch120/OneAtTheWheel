@@ -1,7 +1,7 @@
 import 'ol/ol.css'
 import { useEffect, useState } from 'react'
 import { Map } from 'ol'
-import { InitMap } from '../map/map'
+import { InitMap } from '../map/InitMap'
 
 export interface IOneMap {
   courseId: string
