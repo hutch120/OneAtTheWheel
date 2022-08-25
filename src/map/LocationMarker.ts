@@ -38,38 +38,28 @@ export function InitLocationMarker({ map }: IInitLocationMarker) {
 
   map.addLayer(vectorLayer)
 
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(updatePosition, updatePositionErr)
-    const watchId = navigator.geolocation.watchPosition(updatePosition, updatePositionErr, {
-      enableHighAccuracy: true,
-      maximumAge: 15000,
-      timeout: 12000
-    })
-    console.log('position watchId', watchId)
-  }
-
   return { success: true, message: 'Location Marker Initalised.' }
 }
 
-interface IUpdateLocationMarker {
+export function UpdateLocationMarker(position: GeolocationPosition) {
+  // const { accuracy, altitude, altitudeAccuracy, heading, latitude, longitude, speed } =  position.coords
+  // const timestamp = position.timestamp
+  const { latitude, longitude } = position.coords
+  UpdatePosition({ lon: longitude, lat: latitude })
+}
+
+export function UpdateLocationMarkerErr(positionError: GeolocationPositionError) {
+  console.log('Position update error', positionError)
+}
+
+interface IUpdatePosition {
   lon: number
   lat: number
 }
 
-export function UpdateLocationMarker({ lon, lat }: IUpdateLocationMarker) {
+function UpdatePosition({ lon, lat }: IUpdatePosition) {
   if (geoMarker) {
     const position = new Point(fromLonLat([lon, lat]))
     geoMarker.setGeometry(position)
   }
-}
-
-function updatePosition(position: GeolocationPosition) {
-  // const { accuracy, altitude, altitudeAccuracy, heading, latitude, longitude, speed } =  position.coords
-  // const timestamp = position.timestamp
-  const { latitude, longitude } = position.coords
-  UpdateLocationMarker({ lon: longitude, lat: latitude })
-}
-
-function updatePositionErr(positionError: GeolocationPositionError) {
-  console.log('Position update error', positionError)
 }
