@@ -67,7 +67,7 @@ const marks: IMarks = {
   },
   test_east: {
     id: 'test_east',
-    name: 'test_east',
+    name: 'test_easta',
     lon: 145.7363891,
     lat: -37.81195
   }
