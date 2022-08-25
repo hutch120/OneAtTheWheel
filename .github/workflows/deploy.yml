@@ -50,3 +50,6 @@ jobs:
         run: yarn && yarn build
       - name: Copy files to the production website with the AWS CLI
         run: aws s3 sync ./build s3://one-at-the-wheel --delete --exclude "*.map" --acl public-read
+      - name: Clear cache oatw.hutchisonsoftware.com.au
+        run: |
+          aws cloudfront create-invalidation --distribution-id E227UTWMV9U9J4 --paths "/*"
