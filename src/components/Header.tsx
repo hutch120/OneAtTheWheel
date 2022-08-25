@@ -43,7 +43,7 @@ export function Header() {
                   <Link to="/">Home</Link>
                 </li>
                 <li className="text-white hover:text-indigo-200">
-                  <Link to="/new">New Course</Link>
+                  <Link to="/pricing">Pricing</Link>
                 </li>
                 <li className="text-white hover:text-indigo-200">
                   <Link to="/about">About</Link>
