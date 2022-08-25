@@ -41,11 +41,11 @@ export function InitMapMarks({ map, course, setMarkId }: IInitMapMarks) {
     }
     const styleDot: Style = new Style({
       image: new CircleStyle({
-        radius: 15,
+        radius: 20,
         fill: new Fill({ color: markColor }),
         stroke: new Stroke({
           color: 'white',
-          width: 3
+          width: 2
         })
       })
     })
