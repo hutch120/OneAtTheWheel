@@ -27,15 +27,9 @@ export function MapFooter({ markId }: IMapFooter) {
 
   let bearingStr = ''
   if (geolocation.longitude && geolocation.latitude && mark?.lon && mark?.lat) {
-    console.log(
-      'bearing to mark data',
-      geolocation.longitude,
-      geolocation.latitude,
-      mark.lon,
-      mark.lat
-    )
+    // console.log(      'bearing to mark data',      geolocation.longitude,      geolocation.latitude,      mark.lon,      mark.lat    )
     const bearing = GetBearing(geolocation.longitude, geolocation.latitude, mark.lon, mark.lat)
-    console.log('bearing to mark', bearing)
+    // console.log('bearing to mark', bearing)
     bearingStr = bearing + ''
   }
 

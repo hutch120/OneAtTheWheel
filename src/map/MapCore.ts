@@ -38,7 +38,7 @@ export function InitMapCore({ map, courseId, follow, setMarkId }: IInitMap) {
     (position) => UpdatePosition(position, map),
     UpdatePositionErr
   )
-  const watchId = navigator.geolocation.watchPosition(
+  navigator.geolocation.watchPosition(
     (position) => UpdatePosition(position, map),
     UpdatePositionErr,
     {
@@ -47,7 +47,7 @@ export function InitMapCore({ map, courseId, follow, setMarkId }: IInitMap) {
       timeout: 12000
     }
   )
-  console.log('position watchId', watchId)
+  // console.log('position watchId', watchId)
 
   return { success: true, message: 'Map Initalised' }
 }

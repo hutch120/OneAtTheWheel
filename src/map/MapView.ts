@@ -18,7 +18,8 @@ export function InitMapView({ map, course, follow }: IInitView) {
 
   const view = new View({
     center: fromLonLat([lon, lat]),
-    zoom
+    zoom,
+    rotation: 0
   })
 
   map.setView(view)

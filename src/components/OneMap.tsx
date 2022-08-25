@@ -12,7 +12,7 @@ export interface IOneMap {
 export function OneMap({ courseId, follow, setMarkId }: IOneMap) {
   const [loadFailed, setLoadFailed] = useState(false)
 
-  console.log('follow', follow)
+  // console.log('follow', follow)
   useEffect(() => {
     const map = new Map()
     map.setTarget('map')
