@@ -101,6 +101,7 @@ export function MapFooter({ markId }: IMapFooter) {
               }`}
             >
               <div className="grid">
+                <img className="fixed right-0 bottom-5 h-40 w-40" src="/compass.png" />
                 <div className="p-2">
                   <Icons.ArrowsPointingIn />
                   <div className="inline pl-2 text-white">lat: {geolocation.latitude}</div>
