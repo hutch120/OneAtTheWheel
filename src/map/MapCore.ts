@@ -9,8 +9,10 @@ interface IInitMap {
   map: Map
   courseId: string
   follow: boolean
+  setMarkId: React.Dispatch<React.SetStateAction<string>>
 }
-export function InitMapCore({ map, courseId, follow }: IInitMap) {
+
+export function InitMapCore({ map, courseId, follow, setMarkId }: IInitMap) {
   const course = GetCourse(courseId)
   if (!course) {
     return { success: false, message: 'Unable to get course for the courseId' }
@@ -25,26 +27,33 @@ export function InitMapCore({ map, courseId, follow }: IInitMap) {
   const InitLocationMarkerRes = InitLocationMarker({ map })
   if (!InitLocationMarkerRes.success) return InitLocationMarkerRes
 
-  const InitMapMarksRes = InitMapMarks({ map, course })
+  const InitMapMarksRes = InitMapMarks({ map, course, setMarkId })
   if (!InitMapMarksRes.success) return InitMapMarksRes
 
   if (!navigator.geolocation) {
     return { success: false, message: 'GeoLocation not available.' }
   }
 
-  navigator.geolocation.getCurrentPosition(UpdatePosition, UpdatePositionErr)
-  const watchId = navigator.geolocation.watchPosition(UpdatePosition, UpdatePositionErr, {
-    enableHighAccuracy: true,
-    maximumAge: 15000,
-    timeout: 12000
-  })
+  navigator.geolocation.getCurrentPosition(
+    (position) => UpdatePosition(position, map),
+    UpdatePositionErr
+  )
+  const watchId = navigator.geolocation.watchPosition(
+    (position) => UpdatePosition(position, map),
+    UpdatePositionErr,
+    {
+      enableHighAccuracy: true,
+      maximumAge: 15000,
+      timeout: 12000
+    }
+  )
   console.log('position watchId', watchId)
 
   return { success: true, message: 'Map Initalised' }
 }
 
-function UpdatePosition(position: GeolocationPosition) {
-  UpdateLocationMarker(position)
+function UpdatePosition(position: GeolocationPosition, map: Map) {
+  UpdateLocationMarker(position, map)
   UpdateMark(position)
 }
 

@@ -2,11 +2,6 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import * as Icons from './Icons'
 
-// For non-map data, push data down from top header height.
-export function HeaderSpacer() {
-  return <div className="h-18"></div>
-}
-
 // From  here: https://larainfo.com/blogs/react-responsive-navbar-menu-with-tailwind-css-example
 export function Header() {
   const [navbar, setNavbar] = useState(false)

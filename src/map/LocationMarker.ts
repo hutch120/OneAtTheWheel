@@ -41,7 +41,7 @@ export function InitLocationMarker({ map }: IInitLocationMarker) {
   return { success: true, message: 'Location Marker Initalised.' }
 }
 
-export function UpdateLocationMarker(position: GeolocationPosition) {
+export function UpdateLocationMarker(position: GeolocationPosition, map: Map) {
   // const { accuracy, altitude, altitudeAccuracy, heading, latitude, longitude, speed } =  position.coords
   // const timestamp = position.timestamp
   const { latitude, longitude } = position.coords

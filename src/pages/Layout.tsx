@@ -5,9 +5,10 @@ interface ILayout {
   children: JSX.Element | JSX.Element[]
   scrollContent?: boolean
   showMapFooter?: boolean
+  markId?: string
 }
 
-export function Layout({ children, scrollContent = true, showMapFooter = false }: ILayout) {
+export function Layout({ children, scrollContent = true, showMapFooter = false, markId }: ILayout) {
   return (
     <div className="h-screen flex flex-col">
       <Header />
@@ -23,7 +24,7 @@ export function Layout({ children, scrollContent = true, showMapFooter = false }
         </div>
       )}
 
-      {showMapFooter && <MapFooter />}
+      {showMapFooter && <MapFooter markId={markId} />}
     </div>
   )
 }

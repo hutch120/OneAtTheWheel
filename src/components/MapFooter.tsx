@@ -2,25 +2,42 @@ import { useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import * as Icons from './Icons'
 import useGeolocation from 'react-hook-geolocation'
-// import { GetCourse } from '../map/courses'
+import { GetMark, IMarkData, GetBearing } from '../map/courses'
 import { format } from 'timeago.js'
 
-// For non-map data, push data down from top header height.
-export function HeaderSpacer() {
-  return <div className="h-18"></div>
+interface IMapFooter {
+  markId?: string
 }
 
-// From  here: https://larainfo.com/blogs/react-responsive-navbar-menu-with-tailwind-css-example
-export function MapFooter() {
+export function MapFooter({ markId }: IMapFooter) {
   const { courseId } = useParams<string>()
   const { follow } = useParams<string>()
   const [navbar, setNavbar] = useState(false)
+
+  let mark: IMarkData | undefined = undefined
+  if (markId && markId !== '') {
+    mark = GetMark(markId)
+  }
 
   const geolocation = useGeolocation({
     enableHighAccuracy: true,
     maximumAge: 15000,
     timeout: 12000
   })
+
+  let bearingStr = ''
+  if (geolocation.longitude && geolocation.latitude && mark?.lon && mark?.lat) {
+    console.log(
+      'bearing to mark data',
+      geolocation.longitude,
+      geolocation.latitude,
+      mark.lon,
+      mark.lat
+    )
+    const bearing = GetBearing(geolocation.longitude, geolocation.latitude, mark.lon, mark.lat)
+    console.log('bearing to mark', bearing)
+    bearingStr = bearing + ''
+  }
 
   if (!courseId || courseId === '') {
     return <div>Invalid CourseId!</div>
@@ -55,9 +72,7 @@ export function MapFooter() {
 
               {!bFollow && (
                 <Link to={followUrl} aria-label="Follow">
-                  <h2 className="text-2xl font-bold text-white">
-                    <Icons.ArrowTrendingUp />
-                  </h2>
+                  <h2 className="text-2xl font-bold text-white">{bearingStr}</h2>
                 </Link>
               )}
               {bFollow && (

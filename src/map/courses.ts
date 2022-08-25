@@ -29,7 +29,18 @@ export interface ICourse {
 // Courses: https://img1.wsimg.com/blobby/go/441ac53e-28ec-426d-ae66-90bed6b6b56d/downloads/SI%202021-22%20-%203%20June%202022%20-%20App%20F.pdf?ver=1660718264224
 
 // https://coordinateconverter.org/
-const marks = {
+interface IMarks {
+  [key: string]: IMarkData
+}
+
+export interface IMarkData {
+  id: string
+  name: string
+  lon: number
+  lat: number
+}
+
+const marks: IMarks = {
   hybc_ch74: {
     id: 'hybc_ch74',
     name: 'Channel 74 (Ch74)',
@@ -47,6 +58,18 @@ const marks = {
     name: 'R4 Yellow Buoy',
     lon: 144.922667,
     lat: -37.845
+  },
+  test_north: {
+    id: 'test_north',
+    name: 'test_north',
+    lon: 144.9783,
+    lat: -37.5946477
+  },
+  test_east: {
+    id: 'test_east',
+    name: 'test_east',
+    lon: 145.7363891,
+    lat: -37.81195
   }
 }
 
@@ -66,6 +89,14 @@ const courses: ICourse[] = [
       {
         mark: marks.hybc_v,
         passTo: EMarkPassTo.port
+      },
+      {
+        mark: marks.test_north,
+        passTo: EMarkPassTo.port
+      },
+      {
+        mark: marks.test_east,
+        passTo: EMarkPassTo.starboard
       }
     ]
   },
@@ -102,4 +133,32 @@ export function GetCourse(courseId: string): ICourse | null {
     }
   }
   return null
+}
+
+export function GetMark(markId: string): IMarkData {
+  return marks[markId]
+}
+
+// Converts from degrees to radians.
+function toRadians(degrees: number) {
+  return (degrees * Math.PI) / 180
+}
+
+// Converts from radians to degrees.
+function toDegrees(radians: number) {
+  return (radians * 180) / Math.PI
+}
+
+export function GetBearing(lon1: number, lat1: number, lon2: number, lat2: number) {
+  lat1 = toRadians(lat1)
+  lon1 = toRadians(lon1)
+  lat2 = toRadians(lat2)
+  lon2 = toRadians(lon2)
+
+  const y = Math.sin(lon2 - lon1) * Math.cos(lat2)
+  const x =
+    Math.cos(lat1) * Math.sin(lat2) - Math.sin(lat1) * Math.cos(lat2) * Math.cos(lon2 - lon1)
+  let brng = Math.atan2(y, x)
+  brng = toDegrees(brng)
+  return Math.floor((brng + 360) % 360)
 }

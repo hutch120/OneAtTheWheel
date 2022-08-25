@@ -9,15 +9,19 @@ import { EMarkPassTo, ICourse } from './courses'
 import Geometry from 'ol/geom/Geometry'
 import Select from 'ol/interaction/Select'
 import { click } from 'ol/events/condition'
+import { Coordinate } from 'ol/coordinate'
+import LineString from 'ol/geom/LineString'
 
 interface IInitMapMarks {
   map: Map
   course: ICourse
+  setMarkId: React.Dispatch<React.SetStateAction<string>>
 }
 
-let selectedMark: Feature<Point> | null = null
+let selectedMark: Coordinate | null = null
+let vectorSourceLocationToMark: VectorSource | null = null
 
-export function InitMapMarks({ map, course }: IInitMapMarks) {
+export function InitMapMarks({ map, course, setMarkId }: IInitMapMarks) {
   const instructions = course.instructions
   const features: Feature<Geometry>[] = []
   for (let index = 0; index < instructions.length; index++) {
@@ -90,10 +94,12 @@ export function InitMapMarks({ map, course }: IInitMapMarks) {
     })
 
     const markFeature = new Feature({
+      name: mark.id,
       type: 'geoMarker',
       geometry: position
     })
 
+    markFeature.setId(mark.id)
     markFeature.setStyle([styleDot, styleMarkName, styleMarkPassTo, styleMarkOrder])
     features.push(markFeature)
   }
@@ -106,6 +112,19 @@ export function InitMapMarks({ map, course }: IInitMapMarks) {
 
   map.addLayer(vectorLayerMarks)
 
+  const locationToMarkFeature = new Feature({
+    type: 'lineString'
+  })
+
+  vectorSourceLocationToMark = new VectorSource({
+    features: [locationToMarkFeature]
+  })
+  const vectorLayerLocationToMark = new VectorLayer({
+    source: vectorSourceLocationToMark
+  })
+
+  map.addLayer(vectorLayerLocationToMark)
+
   const selectClick = new Select({
     condition: click,
     style: null
@@ -114,15 +133,11 @@ export function InitMapMarks({ map, course }: IInitMapMarks) {
   selectClick.on('select', function (e) {
     const features = e.target.getFeatures()
     if (features.getLength() > 0) {
-      selectedMark = features.item(0)
-      const info =
-        features.getLength() +
-        ' selected features (last operation selected ' +
-        e.selected.length +
-        ' and deselected ' +
-        e.deselected.length +
-        ' features)'
-      console.log('info', info, selectedMark)
+      const selectedMarkFeature = features.item(0) as Feature<Point>
+      selectedMark = selectedMarkFeature?.getGeometry()?.getCoordinates() ?? null
+      const markId = selectedMarkFeature.getId() as string
+      console.log('selectedMark', selectedMark)
+      setMarkId(markId)
     }
   })
 
@@ -148,7 +163,13 @@ interface IUpdatePosition {
 function UpdatePosition({ lon, lat }: IUpdatePosition) {
   if (selectedMark) {
     console.log('Device position', lon, lat, 'selectedMark', selectedMark)
-    // const position = new Point(fromLonLat([lon, lat]))
-    // TODO: Calculate info between locations and place indicators on map.
+    vectorSourceLocationToMark?.clear()
+    const currentLocation = fromLonLat([lon, lat])
+    const lineString = [currentLocation, selectedMark]
+    const locationToMarkFeature = new Feature({
+      type: 'lineString',
+      geometry: new LineString(lineString)
+    })
+    vectorSourceLocationToMark?.addFeature(locationToMarkFeature)
   }
 }
