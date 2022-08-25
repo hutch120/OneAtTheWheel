@@ -1,4 +1,3 @@
-import { intersectsSegment } from 'ol/extent'
 import { Layout } from './Layout'
 
 function Buy() {
