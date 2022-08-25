@@ -21,6 +21,13 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
+
+      - name: Generate config.js file
+        run: |
+          echo 'export const config = {' > ./src/config.js
+          echo "VERSION: '`date +"%s"`'" >> ./src/config.js
+          echo '}' >> ./src/config.js
+
       - run: yarn
       - run: node ./node_modules/serverless/bin/serverless.js deploy --stage prod --verbose
         env:

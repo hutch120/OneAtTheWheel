@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { Layout } from './Layout'
 import { GetCourses } from '../map/courses'
+import { config } from '../config'
 
 export function Landing() {
   const courses = GetCourses()
@@ -28,6 +29,7 @@ export function Landing() {
           )
         })}
       </div>
+      <div className="text-gray-200 fixed bottom-0 right-0">Ver.{config.VERSION}</div>
     </Layout>
   )
 }
