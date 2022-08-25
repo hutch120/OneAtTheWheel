@@ -52,9 +52,11 @@ export function InitMapMarks({ map, course, setMarkId }: IInitMapMarks) {
 
     const styleMarkName: Style = new Style({
       text: new Text({
+        font: '16px sans-serif',
         text: mark.name,
         textAlign: 'left',
-        offsetX: 20,
+        offsetY: -8,
+        offsetX: 25,
         fill: new Fill({
           color: 'black'
         }),
@@ -67,10 +69,11 @@ export function InitMapMarks({ map, course, setMarkId }: IInitMapMarks) {
 
     const styleMarkPassTo: Style = new Style({
       text: new Text({
+        font: '16px sans-serif',
         text: instruction.passTo,
         textAlign: 'left',
-        offsetY: 10,
-        offsetX: 20,
+        offsetY: 8,
+        offsetX: 25,
         fill: new Fill({
           color: 'black'
         }),
@@ -83,6 +86,7 @@ export function InitMapMarks({ map, course, setMarkId }: IInitMapMarks) {
 
     const styleMarkOrder: Style = new Style({
       text: new Text({
+        font: '20px sans-serif',
         text: order + '',
         fill: new Fill({
           color: 'black'
@@ -105,10 +109,10 @@ export function InitMapMarks({ map, course, setMarkId }: IInitMapMarks) {
     })
 
     markFeatureDot.setId(mark.id)
-    markFeatureDot.setStyle([styleDot])
+    markFeatureDot.setStyle([styleDot, styleMarkOrder])
     featuresMarkDots.push(markFeatureDot)
 
-    markFeatureText.setStyle([styleMarkName, styleMarkPassTo, styleMarkOrder])
+    markFeatureText.setStyle([styleMarkName, styleMarkPassTo])
     featuresMarkText.push(markFeatureText)
   }
   const styleLine: Style = new Style({
