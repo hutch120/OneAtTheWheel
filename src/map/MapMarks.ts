@@ -109,10 +109,10 @@ export function InitMapMarks({ map, course, setMarkId }: IInitMapMarks) {
     })
 
     markFeatureDot.setId(mark.id)
-    markFeatureDot.setStyle([styleDot, styleMarkOrder])
+    markFeatureDot.setStyle([styleDot])
     featuresMarkDots.push(markFeatureDot)
 
-    markFeatureText.setStyle([styleMarkName, styleMarkPassTo])
+    markFeatureText.setStyle([styleMarkName, styleMarkPassTo, styleMarkOrder])
     featuresMarkText.push(markFeatureText)
   }
   const styleLine: Style = new Style({
