@@ -1,5 +1,6 @@
 import { Map } from 'ol'
-import { ICourse, IMarkData } from './courses'
+import { ICourse } from './courses'
+import { IMarkData } from './marks'
 import { InitLocationMarker } from './LocationMarker'
 import { InitMapBase } from './MapBase'
 import { InitMapView } from './MapView'

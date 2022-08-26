@@ -1,6 +1,7 @@
 import { Header } from '../components/Header'
 import { MapFooter } from '../components/MapFooter'
-import { ICourse, IMarkData } from '../map/courses'
+import { ICourse } from '../map/courses'
+import { IMarkData } from '../map/marks'
 
 interface ILayout {
   children: JSX.Element | JSX.Element[]

@@ -2,7 +2,8 @@ import { useState } from 'react'
 import { OneMap } from '../components/OneMap'
 import { Layout } from './Layout'
 import { useParams } from 'react-router-dom'
-import { EMarkPassTo, GetCourse, IMarkData } from '../map/courses'
+import { EMarkPassTo, GetCourse } from '../map/courses'
+import { IMarkData } from '../map/marks'
 
 export function ViewCourse() {
   const { courseId } = useParams<string>()

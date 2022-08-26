@@ -3,7 +3,8 @@ import { useEffect, useState } from 'react'
 import { InitMapCore, Dispose } from '../map/MapCore'
 import { UpdateLineFromPositionToMark } from '../map/MapMarks'
 import { UpdateLocationMarker } from '../map/LocationMarker'
-import { ICourse, IMarkData } from '../map/courses'
+import { ICourse } from '../map/courses'
+import { IMarkData } from '../map/marks'
 import useGeolocation from 'react-hook-geolocation'
 
 export interface IOneMap {

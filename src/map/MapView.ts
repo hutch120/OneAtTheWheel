@@ -1,7 +1,8 @@
 import { Map } from 'ol'
 import View from 'ol/View'
 import { fromLonLat } from 'ol/proj'
-import { ICourse, IMarkData } from './courses'
+import { ICourse } from './courses'
+import { IMarkData } from './marks'
 
 interface IInitView {
   map: Map

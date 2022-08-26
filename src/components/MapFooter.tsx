@@ -2,7 +2,8 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import * as Icons from './Icons'
 import useGeolocation from 'react-hook-geolocation'
-import { ICourse, IMarkData, GetBearing } from '../map/courses'
+import { ICourse, GetBearing } from '../map/courses'
+import { IMarkData } from '../map/marks'
 import { format } from 'timeago.js'
 
 interface IMapFooter {
@@ -40,16 +41,16 @@ export function MapFooter({ course, mark }: IMapFooter) {
   return (
     <div>
       <nav className="bg-blue-500 shadow z-20">
-        <div className="justify-between px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8 bg-blue-500">
+        <div className="justify-between px-4 mx-auto lg:max-w-7xl bg-blue-500">
           <div>
-            <div className="flex items-center justify-between py-3 md:py-5 md:block">
+            <div className="flex items-center justify-between py-3">
               <Link to="/about">
                 <h2 className="text-2xl font-bold text-white">
                   <Icons.Help />
                 </h2>
               </Link>
               <h2 className="text-2xl font-bold text-white">{bearingStr}</h2>
-              <div className="md:hidden">
+              <div className="">
                 <button
                   className="p-2 text-gray-700 rounded-md outline-none focus:border-gray-400 focus:border"
                   onClick={() => setNavbar(!navbar)}
@@ -61,11 +62,7 @@ export function MapFooter({ course, mark }: IMapFooter) {
           </div>
 
           <div>
-            <div
-              className={`flex-1 justify-self-center pb-3 mt-8 md:block md:pb-0 md:mt-0 ${
-                navbar ? 'block' : 'hidden'
-              }`}
-            >
+            <div className={`flex-1 justify-self-center pb-3 mt-8 ${navbar ? 'block' : 'hidden'}`}>
               <div className="grid">
                 <img
                   alt="compass"
