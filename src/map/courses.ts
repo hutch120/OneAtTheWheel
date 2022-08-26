@@ -408,7 +408,7 @@ const courses: ICourse[] = [
   },
   {
     id: 'hbyc-course-15',
-    name: 'Course No. 15 (South Easterly) Approximately 9.8 nautical mile',
+    name: 'Course No. 15 (South Easterly) Approximately 9.8 nautical miles',
     description: [
       'Start: Vicinity of CH.74',
       'Finish: between RMYS A and the Race Committee Vessel',
@@ -441,6 +441,405 @@ const courses: ICourse[] = [
       },
       {
         mark: marks.hbyc_rmys_g,
+        passTo: EMarkPassTo.port
+      },
+      {
+        mark: marks.hbyc_rmys_a,
+        passTo: EMarkPassTo.finish
+      }
+    ]
+  },
+  {
+    id: 'hbyc-course-16',
+    name: 'Course No. 16 (South Westerly) Approximately 9.5 nautical miles',
+    description: [
+      'Start: Vicinity of Ch.74',
+      'Finish: between RMYS C and the Race Committee Vessel',
+      'Start in a south westerly direction - Gellibrand Shoal Mark to starboard - P2 to port - RMYS A to port - finish.'
+    ],
+    instructions: [
+      {
+        mark: marks.hbyc_ch74,
+        passTo: EMarkPassTo.start
+      },
+      {
+        mark: marks.hbyc_gellibrand_shoal,
+        passTo: EMarkPassTo.starboard
+      },
+      {
+        mark: marks.hbyc_p2,
+        passTo: EMarkPassTo.port
+      },
+      {
+        mark: marks.hbyc_rmys_a,
+        passTo: EMarkPassTo.port
+      },
+      {
+        mark: marks.hbyc_rmys_c,
+        passTo: EMarkPassTo.finish
+      }
+    ]
+  },
+  {
+    id: 'hbyc-course-17',
+    name: 'Course No. 17 (South Westerly short) Approximately 8.1 nautical miles',
+    description: [
+      'Start: Vicinity of CH.74',
+      'Finish: between RMYS C and the Race Committee Vessel',
+      'Start in a south westerly direction - Gellibrand Shoal Mark to starboard - P3 to port - RMYS G to port - finish.'
+    ],
+    instructions: [
+      {
+        mark: marks.hbyc_ch74,
+        passTo: EMarkPassTo.start
+      },
+      {
+        mark: marks.hbyc_gellibrand_shoal,
+        passTo: EMarkPassTo.starboard
+      },
+      {
+        mark: marks.hbyc_p3,
+        passTo: EMarkPassTo.port
+      },
+      {
+        mark: marks.hbyc_rmys_g,
+        passTo: EMarkPassTo.port
+      },
+      {
+        mark: marks.hbyc_rmys_c,
+        passTo: EMarkPassTo.finish
+      }
+    ]
+  },
+  {
+    id: 'hbyc-course-18',
+    name: 'Course No. 18 (Westerly) Approximately10.1 nautical miles',
+    description: [
+      'Start: approximately 100m west of Ch.74',
+      'Finish: between RMYS B and the Race Committee Vessel',
+      'Start in a westerly direction - Ch. 17a to port - RMYS B to starboard - P3 to port - finish.'
+    ],
+    instructions: [
+      {
+        mark: marks.hbyc_ch74,
+        passTo: EMarkPassTo.start
+      },
+      {
+        mark: marks.hbyc_17a,
+        passTo: EMarkPassTo.port
+      },
+      {
+        mark: marks.hbyc_rmys_b,
+        passTo: EMarkPassTo.starboard
+      },
+      {
+        mark: marks.hbyc_p3,
+        passTo: EMarkPassTo.port
+      },
+      {
+        mark: marks.hbyc_rmys_b,
+        passTo: EMarkPassTo.finish
+      }
+    ]
+  },
+  {
+    id: 'hbyc-course-19',
+    name: 'Course No. 19 (Easterly) Approximately 9.5 nautical miles',
+    description: [
+      'Start: approximately 100m east of Ch.74',
+      'Finish: between RMYS B and the Race Committee Vessel',
+      'Start in an easterly direction - RMYS A to starboard - P3 to starboard - finish.'
+    ],
+    instructions: [
+      {
+        mark: marks.hbyc_ch74,
+        passTo: EMarkPassTo.start
+      },
+      {
+        mark: marks.hbyc_rmys_a,
+        passTo: EMarkPassTo.starboard
+      },
+      {
+        mark: marks.hbyc_p3,
+        passTo: EMarkPassTo.starboard
+      },
+      {
+        mark: marks.hbyc_rmys_b,
+        passTo: EMarkPassTo.finish
+      }
+    ]
+  },
+  {
+    id: 'hbyc-course-20',
+    name: 'Course No. 20 (Northerly) short Approximately 9.5 nautical miles',
+    description: [
+      'Start: Approximately 100m S.W. of Ch.74',
+      'Finish: between RMYS C and the Race Committee Vessel',
+      'Start in a Northerly direction - R4 to starboard - RMYS C to starboard - R3 to port - east of passing marks Ch.11, 9 and 71 - RMYS G to port - R3 to port - east of passing mark Ch. 11 - finish.'
+    ],
+    instructions: [
+      {
+        mark: marks.hbyc_ch74,
+        passTo: EMarkPassTo.start
+      },
+      {
+        mark: marks.hbyc_r4,
+        passTo: EMarkPassTo.starboard
+      },
+      {
+        mark: marks.hbyc_rmys_c,
+        passTo: EMarkPassTo.starboard
+      },
+      {
+        mark: marks.hbyc_r3,
+        passTo: EMarkPassTo.port
+      },
+      {
+        mark: marks.hbyc_rmys_g,
+        passTo: EMarkPassTo.port
+      },
+      {
+        mark: marks.hbyc_r3,
+        passTo: EMarkPassTo.port
+      },
+      {
+        mark: marks.hbyc_rmys_c,
+        passTo: EMarkPassTo.finish
+      }
+    ]
+  },
+  {
+    id: 'hbyc-course-21',
+    name: 'Course 21 (Northerly) long Approximately 11.5 nautical miles',
+    description: [
+      'Start: Approximately 100m S.W. of Ch.74',
+      'Finish: between RMYS C and the Race Committee Vessel',
+      'Start in a Northerly direction - R4 to starboard - RMYS C to starboard - R2 to port - east of passing marks Ch. 7, 9, 11 and 71 - RMYS G to port - R3 to port - east of passing mark Ch. 11 - finish. '
+    ],
+    instructions: [
+      {
+        mark: marks.hbyc_ch74,
+        passTo: EMarkPassTo.start
+      },
+      {
+        mark: marks.hbyc_r4,
+        passTo: EMarkPassTo.starboard
+      },
+      {
+        mark: marks.hbyc_rmys_c,
+        passTo: EMarkPassTo.starboard
+      },
+      {
+        mark: marks.hbyc_r2,
+        passTo: EMarkPassTo.port
+      },
+      {
+        mark: marks.hbyc_rmys_g,
+        passTo: EMarkPassTo.port
+      },
+      {
+        mark: marks.hbyc_r3,
+        passTo: EMarkPassTo.port
+      },
+      {
+        mark: marks.hbyc_rmys_c,
+        passTo: EMarkPassTo.finish
+      }
+    ]
+  },
+  {
+    id: 'hbyc-course-22',
+    name: 'Course No. 22 (Westerly Long) Approximately12.1 nautical miles',
+    description: [
+      'Start: approximately 100m east of Ch.74',
+      'Finish: between RMYS C and the Race Committee Vessel',
+      'Start in a westerly direction - Ch. 17a to port - RMYS B to starboard - P3 to port - RMYS A to port -finish.'
+    ],
+    instructions: [
+      {
+        mark: marks.hbyc_ch74,
+        passTo: EMarkPassTo.start
+      },
+      {
+        mark: marks.hbyc_17a,
+        passTo: EMarkPassTo.port
+      },
+      {
+        mark: marks.hbyc_rmys_b,
+        passTo: EMarkPassTo.starboard
+      },
+      {
+        mark: marks.hbyc_p3,
+        passTo: EMarkPassTo.port
+      },
+      {
+        mark: marks.hbyc_rmys_a,
+        passTo: EMarkPassTo.port
+      },
+      {
+        mark: marks.hbyc_rmys_c,
+        passTo: EMarkPassTo.finish
+      }
+    ]
+  },
+  {
+    id: 'hbyc-course-23',
+    name: 'Course No. 23 (Westerly) Approximately 10.6 nautical miles',
+    description: [
+      'Start: approximately 100m west of Ch.74',
+      'Finish: between the vertical line on the RMYS tower and RMYS A.',
+      'Boats shall not sail between mark H and the tower, even after finishing and shall not pass through the line after finishing.',
+      'Start in a westerly direction - Ch. 17a to port - RMYS B to starboard - P3 to port - RMYS E to port - finish.'
+    ],
+    instructions: [
+      {
+        mark: marks.hbyc_ch74,
+        passTo: EMarkPassTo.start
+      },
+      {
+        mark: marks.hbyc_17a,
+        passTo: EMarkPassTo.port
+      },
+      {
+        mark: marks.hbyc_rmys_b,
+        passTo: EMarkPassTo.starboard
+      },
+      {
+        mark: marks.hbyc_p3,
+        passTo: EMarkPassTo.port
+      },
+      {
+        mark: marks.hbyc_rmys_e,
+        passTo: EMarkPassTo.port
+      },
+      {
+        mark: marks.hbyc_rmys_a,
+        passTo: EMarkPassTo.finish
+      }
+    ]
+  },
+  {
+    id: 'hbyc-course-24',
+    name: 'Course No. 24 (Northerly) short Approximately 9.5 nautical miles',
+    description: [
+      'Start: Approximately 100m S.W. of Ch.74',
+      'Finish: between the vertical line on the RMYS tower and RMYS A.',
+      'Boats shall not sail between mark H and the tower, even after finishing and shall not pass through the line after finishing.',
+      'Start in a Northerly direction - R4 to starboard - RMYS C to starboard - R3 to port - east of passing',
+      'marks Ch.11, 9 and 71 - RMYS G to port - R3 to port - RMYS E to port - finish'
+    ],
+    instructions: [
+      {
+        mark: marks.hbyc_ch74,
+        passTo: EMarkPassTo.start
+      },
+      {
+        mark: marks.hbyc_r4,
+        passTo: EMarkPassTo.starboard
+      },
+      {
+        mark: marks.hbyc_rmys_c,
+        passTo: EMarkPassTo.starboard
+      },
+      {
+        mark: marks.hbyc_r3,
+        passTo: EMarkPassTo.port
+      },
+      {
+        mark: marks.hbyc_rmys_g,
+        passTo: EMarkPassTo.port
+      },
+      {
+        mark: marks.hbyc_r3,
+        passTo: EMarkPassTo.port
+      },
+      {
+        mark: marks.hbyc_rmys_e,
+        passTo: EMarkPassTo.port
+      },
+      {
+        mark: marks.hbyc_rmys_a,
+        passTo: EMarkPassTo.finish
+      }
+    ]
+  },
+  {
+    id: 'hbyc-course-25',
+    name: 'Course 25 (Northerly) long Approximately 12.1 nautical miles ',
+    description: [
+      'Start: Approximately 100m S.W. of Ch.74',
+      'Finish: between the vertical line on the RMYS tower and RMYS A.',
+      'Boats shall not sail between mark H and the tower, even after finishing and shall not pass through the line after finishing.',
+      'Start in a Northerly direction - R4 to starboard - RMYS C to starboard - R2 to port - east of passing',
+      'marks Ch. 7, 9, 11 and 71 - RMYS G to port - R3 to port - RMYS E to port - finish.'
+    ],
+    instructions: [
+      {
+        mark: marks.hbyc_ch74,
+        passTo: EMarkPassTo.start
+      },
+      {
+        mark: marks.hbyc_r4,
+        passTo: EMarkPassTo.starboard
+      },
+      {
+        mark: marks.hbyc_rmys_c,
+        passTo: EMarkPassTo.starboard
+      },
+      {
+        mark: marks.hbyc_r2,
+        passTo: EMarkPassTo.port
+      },
+      {
+        mark: marks.hbyc_rmys_g,
+        passTo: EMarkPassTo.port
+      },
+      {
+        mark: marks.hbyc_r3,
+        passTo: EMarkPassTo.port
+      },
+      {
+        mark: marks.hbyc_rmys_e,
+        passTo: EMarkPassTo.port
+      },
+      {
+        mark: marks.hbyc_rmys_a,
+        passTo: EMarkPassTo.finish
+      }
+    ]
+  },
+  {
+    id: 'hbyc-course-26',
+    name: 'Course No. 26 (Westerly Long) Approximately 13.5 nautical miles',
+    description: [
+      'Start: approximately 100m east of Ch.74',
+      'Finish: between the vertical line on the RMYS tower and RMYS A.',
+      'Boats shall not sail between mark H and the tower, even after finishing and shall not pass through the line after finishing.',
+      'Start in a westerly direction - Ch. 17a to port - RMYS B to starboard - P3 to port - P2 to port - RMYS E to port - finish.'
+    ],
+    instructions: [
+      {
+        mark: marks.hbyc_ch74,
+        passTo: EMarkPassTo.start
+      },
+      {
+        mark: marks.hbyc_17a,
+        passTo: EMarkPassTo.port
+      },
+      {
+        mark: marks.hbyc_rmys_b,
+        passTo: EMarkPassTo.starboard
+      },
+      {
+        mark: marks.hbyc_p3,
+        passTo: EMarkPassTo.port
+      },
+      {
+        mark: marks.hbyc_p2,
+        passTo: EMarkPassTo.port
+      },
+      {
+        mark: marks.hbyc_rmys_e,
         passTo: EMarkPassTo.port
       },
       {
