@@ -10,11 +10,11 @@ export function Landing() {
     <Layout>
       <div className="p-4">
         <div className="text-lg pt-4 pb-4">
-          HBYC Brass Monkeys Port Phillip Bay courses can be found{' '}
+          HBYC Brass Monkeys Port Phillip Bay{' '}
           <a href="https://hbyc.org.au/race-documents">
-            <span className="underline text-blue-500">here</span>
+            <span className="underline text-blue-500">PDF of courses</span>
           </a>{' '}
-          and are numbered 1 - 26.
+          listed below.
         </div>
         {courses.map((course) => {
           const to = `/view/${course.id}`
@@ -25,6 +25,9 @@ export function Landing() {
                   {course.name}
                 </button>
               </Link>
+              {course.description.map((line, index) => {
+                return <div key={index}>{line}</div>
+              })}
             </div>
           )
         })}

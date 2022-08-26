@@ -41,25 +41,16 @@ export function InitLocationMarker({ map }: IInitLocationMarker) {
   return { success: true, message: 'Location Marker Initalised.' }
 }
 
-export function UpdateLocationMarker(position: GeolocationPosition, map: Map) {
+export function UpdateLocationMarker(position: GeolocationPosition) {
   // const { accuracy, altitude, altitudeAccuracy, heading, latitude, longitude, speed } =  position.coords
   // const timestamp = position.timestamp
   const { latitude, longitude } = position.coords
-  UpdatePosition({ lon: longitude, lat: latitude })
+  if (geoMarker) {
+    const position = new Point(fromLonLat([longitude, latitude]))
+    geoMarker.setGeometry(position)
+  }
 }
 
 export function UpdateLocationMarkerErr(positionError: GeolocationPositionError) {
   console.log('Position update error', positionError)
-}
-
-interface IUpdatePosition {
-  lon: number
-  lat: number
-}
-
-function UpdatePosition({ lon, lat }: IUpdatePosition) {
-  if (geoMarker) {
-    const position = new Point(fromLonLat([lon, lat]))
-    geoMarker.setGeometry(position)
-  }
 }

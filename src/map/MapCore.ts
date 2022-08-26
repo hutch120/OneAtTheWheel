@@ -1,63 +1,41 @@
 import { Map } from 'ol'
-import { GetCourse } from './courses'
-import { InitLocationMarker, UpdateLocationMarker, UpdateLocationMarkerErr } from './LocationMarker'
+import { ICourse, IMarkData } from './courses'
+import { InitLocationMarker } from './LocationMarker'
 import { InitMapBase } from './MapBase'
 import { InitMapView } from './MapView'
-import { InitMapMarks, UpdateMark, UpdateMarkErr } from './MapMarks'
+import { InitMapMarks } from './MapMarks'
 
 interface IInitMap {
   map: Map
-  courseId: string
-  follow: boolean
-  setMarkId: React.Dispatch<React.SetStateAction<string>>
+  course: ICourse
+  setMark: React.Dispatch<React.SetStateAction<IMarkData | undefined>>
 }
 
-export function InitMapCore({ map, courseId, follow, setMarkId }: IInitMap) {
-  const course = GetCourse(courseId)
-  if (!course) {
-    return { success: false, message: 'Unable to get course for the courseId' }
-  }
+let map: Map | null = null
 
+export function InitMapCore({ map, course, setMark }: IInitMap) {
   const InitBaseMapRes = InitMapBase({ map })
   if (!InitBaseMapRes.success) return InitBaseMapRes
 
-  const InitMapViewRes = InitMapView({ map, course, follow })
+  const InitMapViewRes = InitMapView({ map, course })
   if (!InitMapViewRes.success) return InitMapViewRes
 
   const InitLocationMarkerRes = InitLocationMarker({ map })
   if (!InitLocationMarkerRes.success) return InitLocationMarkerRes
 
-  const InitMapMarksRes = InitMapMarks({ map, course, setMarkId })
+  const InitMapMarksRes = InitMapMarks({ map, course, setMark })
   if (!InitMapMarksRes.success) return InitMapMarksRes
 
   if (!navigator.geolocation) {
     return { success: false, message: 'GeoLocation not available.' }
   }
 
-  navigator.geolocation.getCurrentPosition(
-    (position) => UpdatePosition(position, map),
-    UpdatePositionErr
-  )
-  navigator.geolocation.watchPosition(
-    (position) => UpdatePosition(position, map),
-    UpdatePositionErr,
-    {
-      enableHighAccuracy: true,
-      maximumAge: 15000,
-      timeout: 12000
-    }
-  )
-  // console.log('position watchId', watchId)
-
   return { success: true, message: 'Map Initalised' }
 }
 
-function UpdatePosition(position: GeolocationPosition, map: Map) {
-  UpdateLocationMarker(position, map)
-  UpdateMark(position)
-}
-
-function UpdatePositionErr(positionError: GeolocationPositionError) {
-  UpdateLocationMarkerErr(positionError)
-  UpdateMarkErr(positionError)
+export function Dispose() {
+  if (map) {
+    map.dispose()
+  }
+  return { success: true, message: 'Disposed Map' }
 }

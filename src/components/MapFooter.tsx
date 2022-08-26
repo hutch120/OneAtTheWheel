@@ -1,29 +1,24 @@
 import { useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import * as Icons from './Icons'
 import useGeolocation from 'react-hook-geolocation'
-import { GetMark, IMarkData, GetBearing } from '../map/courses'
+import { ICourse, IMarkData, GetBearing } from '../map/courses'
 import { format } from 'timeago.js'
 
 interface IMapFooter {
-  markId?: string
+  course: ICourse
+  mark?: IMarkData
 }
 
-export function MapFooter({ markId }: IMapFooter) {
-  const { courseId } = useParams<string>()
-  const { follow } = useParams<string>()
+export function MapFooter({ course, mark }: IMapFooter) {
   const [navbar, setNavbar] = useState(false)
-
-  let mark: IMarkData | undefined = undefined
-  if (markId && markId !== '') {
-    mark = GetMark(markId)
-  }
-
   const geolocation = useGeolocation({
     enableHighAccuracy: true,
     maximumAge: 15000,
     timeout: 12000
   })
+
+  console.log('MapFooter', course)
 
   let bearingStr = ''
   if (geolocation.longitude && geolocation.latitude && mark?.lon && mark?.lat) {
@@ -33,19 +28,9 @@ export function MapFooter({ markId }: IMapFooter) {
     bearingStr = bearing + ''
   }
 
-  if (!courseId || courseId === '') {
+  if (!course) {
     return <div>Invalid CourseId!</div>
   }
-
-  let bFollow = false
-  if (follow && follow === 'true') {
-    bFollow = true
-  }
-
-  let followUrl = `/view/${courseId}/follow/true`
-  let noFollowUrl = `/view/${courseId}`
-
-  // const course = GetCourse(courseId)
 
   let timeAgoStr = ''
   if (geolocation.timestamp) {
@@ -63,20 +48,7 @@ export function MapFooter({ markId }: IMapFooter) {
                   <Icons.Help />
                 </h2>
               </Link>
-
-              {!bFollow && (
-                <Link to={followUrl} aria-label="Follow">
-                  <h2 className="text-2xl font-bold text-white">{bearingStr}</h2>
-                </Link>
-              )}
-              {bFollow && (
-                <Link to={noFollowUrl} aria-label="Follow">
-                  <h2 className="text-2xl font-bold text-white">
-                    <Icons.ArrowDownCircle />
-                  </h2>
-                </Link>
-              )}
-
+              <h2 className="text-2xl font-bold text-white">{bearingStr}</h2>
               <div className="md:hidden">
                 <button
                   className="p-2 text-gray-700 rounded-md outline-none focus:border-gray-400 focus:border"

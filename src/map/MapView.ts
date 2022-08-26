@@ -1,15 +1,15 @@
 import { Map } from 'ol'
 import View from 'ol/View'
 import { fromLonLat } from 'ol/proj'
-import { ICourse } from './courses'
+import { ICourse, IMarkData } from './courses'
 
 interface IInitView {
   map: Map
   course: ICourse
-  follow: boolean
+  mark?: IMarkData
 }
-export function InitMapView({ map, course, follow }: IInitView) {
-  console.log('InitView: course', course, 'follow', follow)
+export function InitMapView({ map, course }: IInitView) {
+  console.log('InitView: course', course)
 
   const firstMark = course.instructions[0].mark
   const lon = firstMark.lon

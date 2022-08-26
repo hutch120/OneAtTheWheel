@@ -2,26 +2,24 @@ import { Map } from 'ol'
 import Point from 'ol/geom/Point'
 import Feature from 'ol/Feature'
 import { Circle as CircleStyle, Fill, Stroke, Style, Text } from 'ol/style'
-import { fromLonLat, toLonLat } from 'ol/proj'
+import { fromLonLat } from 'ol/proj'
 import VectorSource from 'ol/source/Vector'
 import { Vector as VectorLayer } from 'ol/layer'
-import { EMarkPassTo, ICourse } from './courses'
+import { GetMark, IMarkData, ICourse } from './courses'
 import Geometry from 'ol/geom/Geometry'
 import Select from 'ol/interaction/Select'
 import { click } from 'ol/events/condition'
-import { Coordinate } from 'ol/coordinate'
 import LineString from 'ol/geom/LineString'
 
 interface IInitMapMarks {
   map: Map
   course: ICourse
-  setMarkId: React.Dispatch<React.SetStateAction<string>>
+  setMark: Function
 }
 
-let selectedMark: Coordinate | null = null
 let vectorSourceLocationToMark: VectorSource | null = null
 
-export function InitMapMarks({ map, course, setMarkId }: IInitMapMarks) {
+export function InitMapMarks({ map, course, setMark }: IInitMapMarks) {
   const instructions = course.instructions
   const featuresMarkDots: Feature<Geometry>[] = [] // Dot and text split to make hitbox/select/click work.
   const featuresMarkText: Feature<Geometry>[] = [] // Dot and text split to make hitbox/select/click work.
@@ -31,14 +29,14 @@ export function InitMapMarks({ map, course, setMarkId }: IInitMapMarks) {
     const lon = mark.lon
     const lat = mark.lat
     const position = new Point(fromLonLat([lon, lat]))
-    const order = index + 1
+    // const order = index + 1
 
     let markColor = 'grey'
-    if (instruction.passTo === EMarkPassTo.port) {
+    /*if (instruction.passTo === EMarkPassTo.port) {
       markColor = 'red'
     } else if (instruction.passTo === EMarkPassTo.starboard) {
       markColor = 'green'
-    }
+    }*/
     const styleDot: Style = new Style({
       image: new CircleStyle({
         radius: 20,
@@ -55,7 +53,7 @@ export function InitMapMarks({ map, course, setMarkId }: IInitMapMarks) {
         font: '16px sans-serif',
         text: mark.name,
         textAlign: 'left',
-        offsetY: -8,
+        offsetY: -10,
         offsetX: 25,
         fill: new Fill({
           color: 'black'
@@ -67,12 +65,30 @@ export function InitMapMarks({ map, course, setMarkId }: IInitMapMarks) {
       })
     })
 
+    const styleMarkDescription: Style = new Style({
+      text: new Text({
+        font: '10px sans-serif',
+        text: mark.description,
+        textAlign: 'left',
+        offsetY: 4,
+        offsetX: 25,
+        fill: new Fill({
+          color: 'black'
+        }),
+        stroke: new Stroke({
+          color: 'white',
+          width: 2
+        })
+      })
+    })
+
+    /*
     const styleMarkPassTo: Style = new Style({
       text: new Text({
         font: '16px sans-serif',
         text: instruction.passTo,
         textAlign: 'left',
-        offsetY: 8,
+        offsetY: 18,
         offsetX: 25,
         fill: new Fill({
           color: 'black'
@@ -96,7 +112,7 @@ export function InitMapMarks({ map, course, setMarkId }: IInitMapMarks) {
           width: 3
         })
       })
-    })
+    })*/
 
     const markFeatureDot = new Feature({
       name: mark.id,
@@ -112,7 +128,7 @@ export function InitMapMarks({ map, course, setMarkId }: IInitMapMarks) {
     markFeatureDot.setStyle([styleDot])
     featuresMarkDots.push(markFeatureDot)
 
-    markFeatureText.setStyle([styleMarkName, styleMarkPassTo, styleMarkOrder])
+    markFeatureText.setStyle([styleMarkName, styleMarkDescription])
     featuresMarkText.push(markFeatureText)
   }
   const styleLine: Style = new Style({
@@ -141,7 +157,8 @@ export function InitMapMarks({ map, course, setMarkId }: IInitMapMarks) {
   const vectorLayerMarkDots = new VectorLayer({
     source: new VectorSource({
       features: featuresMarkDots
-    })
+    }),
+    declutter: false
   })
   map.addLayer(vectorLayerMarkDots)
 
@@ -178,12 +195,11 @@ export function InitMapMarks({ map, course, setMarkId }: IInitMapMarks) {
     const featuresCount = features.getLength()
     for (let index = 0; index < featuresCount; index++) {
       const selectedMarkFeature = features.item(index) as Feature<Point>
-      selectedMark = selectedMarkFeature?.getGeometry()?.getCoordinates() ?? null
       const markId = selectedMarkFeature.getId() as string
+
       if (markId && markId !== '') {
-        // console.log('selectedMark', selectedMark)
-        setMarkId(markId)
-        UpdatePosition({}) // Use current values
+        let mark: IMarkData | null = GetMark(markId)
+        setMark(mark)
       }
     }
   })
@@ -191,37 +207,24 @@ export function InitMapMarks({ map, course, setMarkId }: IInitMapMarks) {
   return { success: true, message: 'Location Marker Initalised.' }
 }
 
-export function UpdateMark(position: GeolocationPosition) {
-  // const { accuracy, altitude, altitudeAccuracy, heading, latitude, longitude, speed } =  position.coords
-  // const timestamp = position.timestamp
-  const { latitude, longitude } = position.coords
-  UpdatePosition({ lon: longitude, lat: latitude })
-}
-
-export function UpdateMarkErr(positionError: GeolocationPositionError) {
-  console.log('UpdateMark update error', positionError)
-}
-
 interface IUpdatePosition {
-  lon?: number | null
-  lat?: number | null
+  location: {
+    lon: number
+    lat: number
+  }
+  mark: IMarkData
 }
 
-let currentLon: number | null = null
-let currentLat: number | null = null
-
-function UpdatePosition({ lon = currentLon, lat = currentLat }: IUpdatePosition) {
-  if (selectedMark && lon && lat) {
-    currentLon = lon
-    currentLat = lat
+export function UpdateLineFromPositionToMark({ location, mark }: IUpdatePosition) {
+  if (mark?.lon && mark?.lat && location.lon && location.lat) {
+    console.log('Update line', mark.lon, mark.lat, 'lon:', location.lon, 'lat:', location.lat)
     vectorSourceLocationToMark?.clear()
 
-    const selectedMarkLonLat = toLonLat(selectedMark)
-    console.log('Device position and selected Mark', [[lon, lat], selectedMarkLonLat])
+    const locationLonLat = fromLonLat([location.lon, location.lat])
+    const markLonLat = fromLonLat([mark?.lon, mark?.lat])
 
-    const currentLocation = fromLonLat([lon, lat])
-
-    const lineString = [currentLocation, selectedMark]
+    console.log('Device position and selected Mark', [locationLonLat, markLonLat])
+    const lineString = [locationLonLat, markLonLat]
     const locationToMarkFeature = new Feature({
       type: 'lineString',
       geometry: new LineString(lineString)
