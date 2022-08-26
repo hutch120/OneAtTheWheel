@@ -17,6 +17,13 @@ export function ViewCourse() {
   if (!course) {
     return <div>Invalid Course!</div>
   }
+  if (course.instructions.length === 0) {
+    return (
+      <Layout scrollContent={false} showMapFooter={true} course={course} mark={mark}>
+        <div>No instructions!</div>
+      </Layout>
+    )
+  }
 
   return (
     <Layout scrollContent={false} showMapFooter={true} course={course} mark={mark}>
