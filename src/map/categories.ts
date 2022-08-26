@@ -22,5 +22,10 @@ export const categories: ICategories = {
     id: 'hybc_division_2',
     name: 'HYBC Division 2',
     description: ['DIVISION 2 and 3 (OD/S80/Diamonds and Pursuit) Courses']
+  },
+  hybc_short_courses: {
+    id: 'hybc_short_courses',
+    name: 'HYBC Short Courses',
+    description: ['Sort Courses']
   }
 }

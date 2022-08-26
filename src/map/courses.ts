@@ -79,6 +79,404 @@ const courses: ICourse[] = [
     ]
   },
   {
+    id: 'hbyc-course-2',
+    category: categories.hybc_division_2,
+    name: 'Course No. 2 (Northerly) Approximately 7.1 nautical miles',
+    description: [
+      'Start/Finish: Vicinity of Ch.74',
+      'Start - R4 to starboard, Ch.74 to starboard - Mark V to starboard - R4 to starboard - Ch.74 to starboard - Mark V to starboard - R4 to starboard - Mark V to starboard - finish.'
+    ],
+    instructions: [
+      {
+        mark: marks.hbyc_ch74,
+        passTo: EMarkPassTo.start
+      },
+      {
+        mark: marks.hbyc_r4,
+        passTo: EMarkPassTo.starboard
+      },
+      {
+        mark: marks.hbyc_ch74,
+        passTo: EMarkPassTo.starboard
+      },
+      {
+        mark: marks.hbyc_v,
+        passTo: EMarkPassTo.starboard
+      },
+      {
+        mark: marks.hbyc_r4,
+        passTo: EMarkPassTo.starboard
+      },
+      {
+        mark: marks.hbyc_ch74,
+        passTo: EMarkPassTo.starboard
+      },
+      {
+        mark: marks.hbyc_v,
+        passTo: EMarkPassTo.starboard
+      },
+      {
+        mark: marks.hbyc_r4,
+        passTo: EMarkPassTo.starboard
+      },
+      {
+        mark: marks.hbyc_v,
+        passTo: EMarkPassTo.starboard
+      },
+      {
+        mark: marks.hbyc_ch74,
+        passTo: EMarkPassTo.finish
+      }
+    ]
+  },
+  {
+    id: 'hbyc-course-3',
+    category: categories.hybc_division_2,
+    name: 'Course No. 3 (Easterly) Approximately 7.2 nautical miles',
+    description: [
+      'Start/Finish: approximately 100m south of Ch.74',
+      'Start - RMYS D to port - Ch.74 to port - Ch.17a to port - RMYS D to port - Ch.74 to port - Ch.17a to port - RMYS D to port - Ch.17a to port - finish.'
+    ],
+    instructions: [
+      {
+        mark: marks.hbyc_ch74,
+        passTo: EMarkPassTo.start
+      },
+      {
+        mark: marks.hbyc_rmys_d,
+        passTo: EMarkPassTo.port
+      },
+      {
+        mark: marks.hbyc_ch74,
+        passTo: EMarkPassTo.port
+      },
+      {
+        mark: marks.hbyc_17a,
+        passTo: EMarkPassTo.port
+      },
+      {
+        mark: marks.hbyc_rmys_d,
+        passTo: EMarkPassTo.port
+      },
+      {
+        mark: marks.hbyc_ch74,
+        passTo: EMarkPassTo.port
+      },
+      {
+        mark: marks.hbyc_17a,
+        passTo: EMarkPassTo.port
+      },
+      {
+        mark: marks.hbyc_rmys_d,
+        passTo: EMarkPassTo.port
+      },
+      {
+        mark: marks.hbyc_17a,
+        passTo: EMarkPassTo.port
+      },
+      {
+        mark: marks.hbyc_ch74,
+        passTo: EMarkPassTo.finish
+      }
+    ]
+  },
+  {
+    id: 'hbyc-course-4',
+    category: categories.hybc_division_2,
+    name: 'Course No. 4 (Westerly) Approximately 7.2 nautical miles',
+    description: [
+      'Start/Finish: approximately 100m south of Ch.74',
+      'Start - Ch.17a to starboard - Ch.74 to starboard - RMYS D to starboard - Ch.17a to starboard -',
+      'Ch.74 to starboard - RMYS D to starboard - Ch.17a to starboard - RMYS D to starboard - finish.'
+    ],
+    instructions: [
+      {
+        mark: marks.hbyc_ch74,
+        passTo: EMarkPassTo.start
+      },
+      {
+        mark: marks.hbyc_17a,
+        passTo: EMarkPassTo.starboard
+      },
+      {
+        mark: marks.hbyc_ch74,
+        passTo: EMarkPassTo.starboard
+      },
+      {
+        mark: marks.hbyc_rmys_d,
+        passTo: EMarkPassTo.starboard
+      },
+      {
+        mark: marks.hbyc_17a,
+        passTo: EMarkPassTo.starboard
+      },
+      {
+        mark: marks.hbyc_ch74,
+        passTo: EMarkPassTo.starboard
+      },
+      {
+        mark: marks.hbyc_rmys_d,
+        passTo: EMarkPassTo.starboard
+      },
+      {
+        mark: marks.hbyc_17a,
+        passTo: EMarkPassTo.starboard
+      },
+      {
+        mark: marks.hbyc_rmys_d,
+        passTo: EMarkPassTo.starboard
+      },
+      {
+        mark: marks.hbyc_ch74,
+        passTo: EMarkPassTo.finish
+      }
+    ]
+  },
+  {
+    id: 'hbyc-course-5',
+    category: categories.hybc_short_courses,
+    name: 'Course No. 5 (Southerly short) Approximately 4.8 nautical miles',
+    description: [
+      'Start/Finish: Vicinity of Ch.74',
+      'Start - Mark V to port - Ch.74 to port - R4 to port - Mark V to port - Ch.74 to port - R4 to port - finish.'
+    ],
+    instructions: [
+      {
+        mark: marks.hbyc_ch74,
+        passTo: EMarkPassTo.start
+      },
+      {
+        mark: marks.hbyc_v,
+        passTo: EMarkPassTo.port
+      },
+      {
+        mark: marks.hbyc_ch74,
+        passTo: EMarkPassTo.port
+      },
+      {
+        mark: marks.hbyc_r4,
+        passTo: EMarkPassTo.port
+      },
+      {
+        mark: marks.hbyc_v,
+        passTo: EMarkPassTo.port
+      },
+      {
+        mark: marks.hbyc_ch74,
+        passTo: EMarkPassTo.port
+      },
+      {
+        mark: marks.hbyc_r4,
+        passTo: EMarkPassTo.port
+      },
+      {
+        mark: marks.hbyc_ch74,
+        passTo: EMarkPassTo.finish
+      }
+    ]
+  },
+  {
+    id: 'hbyc-course-6',
+    category: categories.hybc_short_courses,
+    name: 'Course No. 6 (Northerly short) Approximately 4.8 nautical miles',
+    description: [
+      'Start/Finish: Approximately 100m S.W. of Ch.74',
+      'Start - R4 to starboard - Ch.74 to starboard - Mark V to starboard - R4 to starboard - Ch.74 to starboard - Mark V to starboard - finish.'
+    ],
+    instructions: [
+      {
+        mark: marks.hbyc_ch74,
+        passTo: EMarkPassTo.start
+      },
+      {
+        mark: marks.hbyc_r4,
+        passTo: EMarkPassTo.starboard
+      },
+      {
+        mark: marks.hbyc_ch74,
+        passTo: EMarkPassTo.starboard
+      },
+      {
+        mark: marks.hbyc_v,
+        passTo: EMarkPassTo.starboard
+      },
+      {
+        mark: marks.hbyc_r4,
+        passTo: EMarkPassTo.starboard
+      },
+      {
+        mark: marks.hbyc_ch74,
+        passTo: EMarkPassTo.starboard
+      },
+      {
+        mark: marks.hbyc_v,
+        passTo: EMarkPassTo.starboard
+      },
+      {
+        mark: marks.hbyc_ch74,
+        passTo: EMarkPassTo.finish
+      }
+    ]
+  },
+  {
+    id: 'hbyc-course-7',
+    category: categories.hybc_short_courses,
+    name: 'Course No. 7 (Easterly short) Approximately 4.8 nautical miles',
+    description: [
+      'Start/Finish: approximately 100m south of Ch.74',
+      'Start - RMYS D to port - Ch.74 to port - Ch.17a to port - RMYS D to port - Ch.74 to port - Ch.17a to port - finish.'
+    ],
+    instructions: [
+      {
+        mark: marks.hbyc_ch74,
+        passTo: EMarkPassTo.start
+      },
+      {
+        mark: marks.hbyc_rmys_d,
+        passTo: EMarkPassTo.port
+      },
+      {
+        mark: marks.hbyc_ch74,
+        passTo: EMarkPassTo.port
+      },
+      {
+        mark: marks.hbyc_17a,
+        passTo: EMarkPassTo.port
+      },
+      {
+        mark: marks.hbyc_rmys_d,
+        passTo: EMarkPassTo.port
+      },
+      {
+        mark: marks.hbyc_ch74,
+        passTo: EMarkPassTo.port
+      },
+      {
+        mark: marks.hbyc_17a,
+        passTo: EMarkPassTo.port
+      },
+      {
+        mark: marks.hbyc_ch74,
+        passTo: EMarkPassTo.finish
+      }
+    ]
+  },
+  {
+    id: 'hbyc-course-8',
+    category: categories.hybc_short_courses,
+    name: 'Course No. 8 (Westerly short) Approximately 4.8 nautical miles',
+    description: [
+      'Start/Finish: approximately 100m south of Ch.74',
+      'Start - Ch.17a to starboard - Ch.74 to starboard - RMYS D to starboard - Ch.17a to starboard - Ch.74 to starboard - RMYS D to starboard - finish.'
+    ],
+    instructions: [
+      {
+        mark: marks.hbyc_ch74,
+        passTo: EMarkPassTo.start
+      },
+      {
+        mark: marks.hbyc_17a,
+        passTo: EMarkPassTo.starboard
+      },
+      {
+        mark: marks.hbyc_ch74,
+        passTo: EMarkPassTo.starboard
+      },
+      {
+        mark: marks.hbyc_rmys_d,
+        passTo: EMarkPassTo.starboard
+      },
+      {
+        mark: marks.hbyc_rmys_d,
+        passTo: EMarkPassTo.port
+      },
+      {
+        mark: marks.hbyc_17a,
+        passTo: EMarkPassTo.starboard
+      },
+      {
+        mark: marks.hbyc_ch74,
+        passTo: EMarkPassTo.starboard
+      },
+      {
+        mark: marks.hbyc_rmys_d,
+        passTo: EMarkPassTo.starboard
+      },
+      {
+        mark: marks.hbyc_ch74,
+        passTo: EMarkPassTo.finish
+      }
+    ]
+  },
+  {
+    id: 'hbyc-course-9',
+    category: categories.hybc_short_courses,
+    name: 'Course No. 9 (Southerly with Start Line gate) Approximately 4.8 nautical miles',
+    description: [
+      'Start/Finish: Vicinity of Ch.74',
+      'Start - Mark V to port - Ch.74 to port - R4 to port - through Start Line - Mark V to port - Ch.74 to port - R4 to port - finish. '
+    ],
+    instructions: [
+      {
+        mark: marks.hbyc_ch74,
+        passTo: EMarkPassTo.start
+      },
+      {
+        mark: marks.hbyc_v,
+        passTo: EMarkPassTo.port
+      },
+      {
+        mark: marks.hbyc_ch74,
+        passTo: EMarkPassTo.port
+      },
+      {
+        mark: marks.hbyc_r4,
+        passTo: EMarkPassTo.port
+      },
+      {
+        mark: marks.hbyc_ch74,
+        passTo: EMarkPassTo.starboard
+      },
+      {
+        mark: marks.hbyc_v,
+        passTo: EMarkPassTo.port
+      },
+      {
+        mark: marks.hbyc_ch74,
+        passTo: EMarkPassTo.port
+      },
+      {
+        mark: marks.hbyc_r4,
+        passTo: EMarkPassTo.port
+      },
+      {
+        mark: marks.hbyc_ch74,
+        passTo: EMarkPassTo.finish
+      }
+    ]
+  },
+  {
+    id: 'hbyc-course-10',
+    category: categories.hybc_short_courses,
+    name: 'Course No. 10 - Not in use',
+    description: [],
+    instructions: []
+  },
+  {
+    id: 'hbyc-course-11',
+    category: categories.hybc_short_courses,
+    name: 'Course No. 11 - Not in use',
+    description: [],
+    instructions: []
+  },
+  {
+    id: 'hbyc-course-12',
+    category: categories.hybc_short_courses,
+    name: 'Course No. 12 - Not in use',
+    description: [],
+    instructions: []
+  },
+  {
     id: 'hbyc-course-13',
     category: categories.hybc_division_1,
     name: 'Course No. 13 (Southerly) Approximately 11.6 nautical miles',
