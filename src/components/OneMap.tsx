@@ -2,6 +2,7 @@ import { Map } from 'ol'
 import { useEffect, useState } from 'react'
 import { InitMapCore, Dispose } from '../map/MapCore'
 import { UpdateLineFromPositionToMark } from '../map/MapMarks'
+import { UpdateLocationMarker } from '../map/LocationMarker'
 import { ICourse, IMarkData } from '../map/courses'
 import useGeolocation from 'react-hook-geolocation'
 
@@ -47,6 +48,13 @@ export function OneMap({ course, mark, setMark }: IOneMap) {
       UpdateLineFromPositionToMark({ location, mark })
     }
   }, [mapInitalised, geolocation, mark])
+
+  useEffect(() => {
+    if (mapInitalised && geolocation) {
+      const location: ILocation = { lon: geolocation.longitude, lat: geolocation.latitude }
+      UpdateLocationMarker({ location })
+    }
+  }, [mapInitalised, geolocation])
 
   if (!course || loadFailed) {
     return <div>Unable to load map!</div>

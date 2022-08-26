@@ -5,6 +5,7 @@ import { Circle as CircleStyle, Fill, Stroke, Style } from 'ol/style'
 import { fromLonLat } from 'ol/proj'
 import VectorSource from 'ol/source/Vector'
 import { Vector as VectorLayer } from 'ol/layer'
+import { ILocation } from '../components/OneMap'
 
 interface IInitLocationMarker {
   map: Map
@@ -41,12 +42,14 @@ export function InitLocationMarker({ map }: IInitLocationMarker) {
   return { success: true, message: 'Location Marker Initalised.' }
 }
 
-export function UpdateLocationMarker(position: GeolocationPosition) {
+interface IUpdateLocationMarker {
+  location: ILocation
+}
+export function UpdateLocationMarker({ location }: IUpdateLocationMarker) {
   // const { accuracy, altitude, altitudeAccuracy, heading, latitude, longitude, speed } =  position.coords
   // const timestamp = position.timestamp
-  const { latitude, longitude } = position.coords
   if (geoMarker) {
-    const position = new Point(fromLonLat([longitude, latitude]))
+    const position = new Point(fromLonLat([location.lon, location.lat]))
     geoMarker.setGeometry(position)
   }
 }
