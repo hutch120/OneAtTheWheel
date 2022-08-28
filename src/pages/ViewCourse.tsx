@@ -2,8 +2,9 @@ import { useState } from 'react'
 import { OneMap } from '../components/OneMap'
 import { Layout } from './Layout'
 import { useParams } from 'react-router-dom'
-import { EMarkPassTo, GetCourse } from '../map/courses'
+import { GetCourse } from '../map/courses'
 import { IMarkData } from '../map/marks'
+import { PickMark } from 'components/PickMark'
 
 export function ViewCourse() {
   const { courseId } = useParams<string>()
@@ -26,32 +27,14 @@ export function ViewCourse() {
   }
 
   return (
-    <Layout scrollContent={false} showMapFooter={true} course={course} mark={mark}>
-      <div className="absolute z-10 top-40 left-2">
-        {course.instructions.map((instruction, index) => {
-          let color = 'bg-blue-500'
-          let hover = 'hover:bg-blue-700'
-          if (instruction.passTo === EMarkPassTo.port) {
-            color = 'bg-red-500'
-            hover = 'hover:bg-red-700'
-          } else if (instruction.passTo === EMarkPassTo.starboard) {
-            color = 'bg-green-500'
-            hover = 'hover:bg-green-700'
-          }
-          return (
-            <div key={index} className="p-1">
-              <button
-                onClick={() => {
-                  setMark(instruction.mark)
-                }}
-                className={`${color} ${hover} text-white font-bold py-2 px-4 rounded`}
-              >
-                {index + 1} {instruction.mark.name}
-              </button>
-            </div>
-          )
-        })}
-      </div>
+    <Layout
+      scrollContent={false}
+      showMapFooter={true}
+      showMapHeaderMenu={false}
+      course={course}
+      mark={mark}
+    >
+      <PickMark course={course} setMark={setMark} />
       <OneMap course={course} mark={mark} setMark={setMark} />
     </Layout>
   )
